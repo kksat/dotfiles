@@ -1,0 +1,3 @@
+--ignore Makefile
+--ignore README.md
+--ignore dot.sh
