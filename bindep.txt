@@ -11,3 +11,4 @@ podman
 python
 rust
 make
+stow
