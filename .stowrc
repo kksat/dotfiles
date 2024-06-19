@@ -3,3 +3,4 @@
 --ignore dot.sh
 --ignore .stowrc
 --ignore .gitmodules
+--ignore LICENSE
