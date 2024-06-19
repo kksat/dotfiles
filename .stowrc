@@ -4,4 +4,4 @@
 --ignore .stowrc
 --ignore .gitmodules
 --ignore LICENSE
---ignore test/~
+--ignore test
