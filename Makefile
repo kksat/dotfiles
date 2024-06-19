@@ -1,7 +1,9 @@
+export TESTFOLDER=./test/~/
+export STOWCOMMAND=stow --dotfiles --stow .
 
 .PHONY: stow
 stow: ## Stow all dotfiles
-	stow --dotfiles --stow .
+	${STOWCOMMAND}
 
 .PHONY: simulate
 simulate: ## Simulate stow all dotfiles
@@ -9,4 +11,4 @@ simulate: ## Simulate stow all dotfiles
 
 .PHONY: test
 test:  # Test stow - put all in ./test instread of ~
-	stow --dotfiles --target=./test/~/ --stow . 
+	${STOWCOMMAND} --target="${TESTFOLDER}"
