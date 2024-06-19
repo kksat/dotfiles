@@ -3,8 +3,7 @@ gui:
   windowSize: 'normal' # one of 'normal' | 'half' | 'full' default is 'normal'
   scrollHeight: 2 # how many lines you scroll by
   scrollPastBottom: true # enable scrolling past the bottom
-  scrollOffMargin: 2 # how many lines to keep before/after the cursor when it reaches the 
-top/bottom of the view; see 'Scroll-off Margin' section below
+  scrollOffMargin: 2 # how many lines to keep before/after the cursor when it reaches the  top/bottom of the view; see 'Scroll-off Margin' section below
   scrollOffBehavior: 'margin' # one of 'margin' | 'jump'; see 'Scroll-off Margin' section below
   sidePanelWidth: 0.3333 # number from 0 to 1
   expandFocusedSidePanel: false
@@ -43,18 +42,15 @@ top/bottom of the view; see 'Scroll-off Margin' section below
   showListFooter: true # for seeing the '5 of 20' message in list panels
   showRandomTip: true
   showBranchCommitHash: false # show commit hashes alongside branch names
-  showBottomLine: true # for hiding the bottom information line (unless it has important 
-information to tell you)
+  showBottomLine: true # for hiding the bottom information line (unless it has important information to tell you)
   showPanelJumps: true # for showing the jump-to-panel keybindings as panel subtitles
   showCommandLog: true
   showIcons: false # deprecated: use nerdFontsVersion instead
-  nerdFontsVersion: "" # nerd fonts version to use ("2" or "3"); empty means don't show nerd font 
-icons
+  nerdFontsVersion: "" # nerd fonts version to use ("2" or "3"); empty means don't show nerd font icons
   showFileIcons: true # for hiding file icons in the file views
   commandLogSize: 8
   splitDiff: 'auto' # one of 'auto' | 'always'
-  skipRewordInEditorWarning: false # for skipping the confirmation before launching the reword 
-editor
+  skipRewordInEditorWarning: false # for skipping the confirmation before launching the reword editor
   border: 'rounded' # one of 'single' | 'double' | 'rounded' | 'hidden'
   animateExplosion: true # shows an explosion animation when nuking the working tree
   portraitMode: 'auto' # one of 'auto' | 'never' | 'always'
@@ -77,8 +73,7 @@ git:
     # one of always, never, when-maximised
     # this determines whether the git graph is rendered in the commits panel
     showGraph: 'when-maximised'
-    # displays the whole git graph by default in the commits panel (equivalent to passing the 
-`--all` argument to `git log`)
+    # displays the whole git graph by default in the commits panel (equivalent to passing the `--all` argument to `git log`)
     showWholeGraph: false
   skipHookPrefix: WIP
   # The main branches. We colour commits green if they belong to one of these branches,
@@ -86,12 +81,9 @@ git:
   mainBranches: [master, main]
   autoFetch: true
   autoRefresh: true
-  fetchAll: true # Pass --all flag when running git fetch. Set to false to fetch only origin (or 
-the current branch's upstream remote if there is one)
-  branchLogCmd: 'git log --graph --color=always --abbrev-commit --decorate --date=relative 
---pretty=medium {{branchName}} --'
-  allBranchesLogCmd: 'git log --graph --all --color=always --abbrev-commit --decorate 
---date=relative  --pretty=medium'
+  fetchAll: true # Pass --all flag when running git fetch. Set to false to fetch only origin (or the current branch's upstream remote if there is one)
+  branchLogCmd: 'git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --'
+  allBranchesLogCmd: 'git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium'
   overrideGpg: false # prevents lazygit from spawning a separate process when using GPG
   disableForcePushing: false
   parseEmoji: false
@@ -104,10 +96,8 @@ os:
   open: ''
   openLink: ''
 refresher:
-  refreshInterval: 10 # File/submodule refresh interval in seconds. Auto-refresh can be disabled 
-via option 'git.autoRefresh'.
-  fetchInterval: 60 # Re-fetch interval in seconds. Auto-fetch can be disabled via option 
-'git.autoFetch'.
+  refreshInterval: 10 # File/submodule refresh interval in seconds. Auto-refresh can be disabled via option 'git.autoRefresh'.
+  fetchInterval: 60 # Re-fetch interval in seconds. Auto-fetch can be disabled via option 'git.autoFetch'.
 update:
   method: prompt # can be: prompt | background | never
   days: 14 # how often an update is checked for
