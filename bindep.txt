@@ -13,3 +13,4 @@ rust
 make
 stow
 fd
+google-cloud-sdk
