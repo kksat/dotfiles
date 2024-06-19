@@ -14,3 +14,4 @@ make
 stow
 fd
 google-cloud-sdk
+ripgrep
