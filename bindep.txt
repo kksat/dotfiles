@@ -17,3 +17,4 @@ google-cloud-sdk
 ripgrep
 gh
 node
+rectangle
