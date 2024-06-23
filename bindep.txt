@@ -19,3 +19,5 @@ gh
 node
 rectangle
 shellcheck
+ffmpeg
+yt-dlp
