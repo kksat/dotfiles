@@ -21,3 +21,4 @@ rectangle
 shellcheck
 ffmpeg
 yt-dlp
+azure-cli
