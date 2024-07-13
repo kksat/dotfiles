@@ -24,3 +24,4 @@ yt-dlp
 azure-cli
 microsoft-teams
 tree
+jq
