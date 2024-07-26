@@ -26,3 +26,4 @@ microsoft-teams
 tree
 jq
 powershell
+dotnet
