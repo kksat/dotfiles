@@ -27,3 +27,4 @@ tree
 jq
 powershell
 dotnet
+kubectl
