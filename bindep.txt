@@ -28,3 +28,4 @@ jq
 powershell
 dotnet
 kubectl
+bash-completion
