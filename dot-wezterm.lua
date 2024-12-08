@@ -7,4 +7,6 @@ if wezterm.target_triple == "x86_64-apple-darwin" or wezterm.target_triple == "a
   config.default_prog = { "/opt/homebrew/bin/tmux" }
 end
 
+config.enable_tab_bar = false
+
 return config
