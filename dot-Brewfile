@@ -1,33 +1,70 @@
-azure-cli
-bash-completion
-dotnet
-fd
-ffmpeg
-gh
-git
-gnupg
-google-cloud-sdk
-jq
-keepassxc
-kubectl
-lazygit
-make
-microsoft-teams
-neovim
-node
-podman
-podman-desktop
-powershell
-python@3.10
-python@3.11
-python@3.12
-python@3.13
-rectangle
-ripgrep
-rust
-shellcheck
-stow
-telegram-desktop
-tree
-wezterm
-yt-dlp
+tap "germag/podman-bootc"
+tap "homebrew/bundle"
+brew "python@3.12"
+brew "awscli"
+brew "azure-cli"
+brew "bash-completion"
+brew "glib"
+brew "cairo"
+brew "cloc"
+brew "coreutils"
+brew "fd"
+brew "ffmpeg"
+brew "gh"
+brew "git"
+brew "git-absorb"
+brew "git-quick-stats"
+brew "gnupg"
+brew "qt"
+brew "gnuplot"
+brew "go"
+brew "gource"
+brew "graphviz"
+brew "hugo"
+brew "imagemagick"
+brew "jq"
+brew "kubernetes-cli"
+brew "lazygit"
+brew "llm"
+brew "make"
+brew "minikube"
+brew "neovim"
+brew "node"
+brew "openshift-cli"
+brew "pipx"
+brew "podman"
+brew "python@3.10"
+brew "python@3.11"
+brew "qemu"
+brew "ripgrep"
+brew "rosa-cli"
+brew "rust"
+brew "scc"
+brew "shellcheck"
+brew "stow"
+brew "telnet"
+brew "tmux"
+brew "tree"
+brew "uv"
+brew "youtube-dl"
+brew "yq"
+brew "yt-dlp"
+brew "zsh-completions"
+brew "zsh-vi-mode"
+brew "germag/podman-bootc/podman-bootc"
+cask "amazon-chime"
+cask "arc"
+cask "dotnet"
+cask "font-fira-code"
+cask "google-cloud-sdk"
+cask "keepassxc"
+cask "microsoft-auto-update"
+cask "microsoft-teams"
+cask "openvpn-connect"
+cask "pgadmin4"
+cask "podman-desktop"
+cask "powershell"
+cask "rectangle"
+cask "telegram-desktop"
+cask "vlc"
+cask "wezterm"
