@@ -1,5 +1,5 @@
 export TESTFOLDER=./test/~/
-export STOWCOMMAND=stow --dotfiles --stow .
+export STOWCOMMAND=stow --dotfiles --stow --target=$$HOME .
 
 .PHONY: stow
 stow: ## Stow all dotfiles
