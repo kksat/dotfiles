@@ -1,3 +1,6 @@
 [submodule "nvim"]
 	path = dot-config/nvim/nvim
 	url = git@github.com:kksat/nvim.git
+[submodule "tpm"]
+	path = dot-tmux/plugins/tpm
+	url = git@github.com:tmux-plugins/tpm.git
