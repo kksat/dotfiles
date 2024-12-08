@@ -1,10 +1,10 @@
 export TESTFOLDER=./test/~/
-export STOWCOMMAND=stow --dotfiles --stow --target=$$HOME .
+export STOWCOMMAND=stow --dotfiles --stow .
 export BREW=brew
 
 .PHONY: stow
 stow: ## Stow all dotfiles
-	${STOWCOMMAND}
+	${STOWCOMMAND} --target=$$HOME
 
 .PHONY: adopt
 adopt: ## Adopt all dotfiles
