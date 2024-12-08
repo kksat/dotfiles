@@ -5,4 +5,8 @@
 --ignore .gitmodules
 --ignore LICENSE
 --ignore test
---ignore .devcontainer/
+--ignore install.sh
+--ignore .DS_store
+--ignore .gitignore
+--ignore .gitmodules
+--ignore .devcontainer
