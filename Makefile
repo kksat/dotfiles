@@ -1,4 +1,4 @@
-export TESTFOLDER=./test/~/
+export TESTFOLDER=./test/
 export STOWCOMMAND=stow --dotfiles --stow .
 export BREW=brew
 
