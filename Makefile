@@ -29,3 +29,6 @@ bundle-bump:  ## Update Brewfile
 .PHONY: Brewfile
 Brewfile: stow  ## Install Brew dependencies
 	${BREW} bundle --global
+
+.PHONY: install
+install: Brewfile stow  ## Install everything
