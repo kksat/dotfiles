@@ -1,5 +1,5 @@
 export TESTFOLDER=./test/
-export STOWCOMMAND=stow --dotfiles --stow .
+export STOWCOMMAND=stow --dotfiles --stow --adopt .
 export BREW=brew
 
 .PHONY: help
