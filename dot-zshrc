@@ -4,6 +4,9 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 . "$HOME/.cargo/env"
 
+if [ -f "~/yandex-cloud/completion.zsh.inc" ]; then source "~/yandex-cloud/completion.zsh.inc"; fi
+
+
 . $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 
