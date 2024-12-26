@@ -1,6 +1,7 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 . "$HOME/.cargo/env"
+. ~/.config/alias
 
 if [ -f "~/yandex-cloud/completion.zsh.inc" ]; then source "~/yandex-cloud/completion.zsh.inc"; fi
 
