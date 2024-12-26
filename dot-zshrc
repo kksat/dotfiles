@@ -9,6 +9,7 @@ if [ -f "~/yandex-cloud/completion.zsh.inc" ]; then source "~/yandex-cloud/compl
 
 . $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
+export PATH="$PATH:$HOME/.local/bin"
 
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
