@@ -1,1 +1,2 @@
 command = /opt/homebrew/bin/tmux
+font-family = "Fira Code"
