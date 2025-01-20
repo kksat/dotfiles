@@ -9,6 +9,10 @@ if [ -f "~/yandex-cloud/completion.zsh.inc" ]; then source "~/yandex-cloud/compl
 
 . $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
+if [[ -s $HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh ]]; then
+  . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+fi
+
 export PATH="$PATH:$HOME/.local/bin"
 
 export GOPATH=$HOME/go
