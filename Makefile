@@ -7,8 +7,11 @@ HOMEBREW_BUNDLE_FILE_GLOBAL=~/.Brewfiles/dev.Brewfile
 help: ## Prints help for targets with comments
 	@cat $(MAKEFILE_LIST) | grep -E '^[a-zA-Z_-]+:.*?## .*$$' | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
+dot-config/nvim: ## Stow nvim
+	(mkdir -p dot-config && cd dot-config && git clone https://github.com/kksat/nvim.git)
+
 .PHONY: stow
-stow: ## Stow all dotfiles
+stow: dot-config/nvim ## Stow all dotfiles
 	${STOWCOMMAND} --target=$$HOME
 
 .PHONY: adopt
@@ -20,7 +23,7 @@ simulate: ## Simulate stow all dotfiles
 	${STOWCOMMAND} --simulate --verbose=2
 
 .PHONY: test
-test:  # Test stow - put all in ./test instread of ~
+test: dot-config/nvim ## Test stow - put all in ./test instread of ~
 	${STOWCOMMAND} --target="${TESTFOLDER}"
 
 .PHONY: bundle-bump
