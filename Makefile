@@ -1,6 +1,7 @@
 export TESTFOLDER=./test/
 export STOWCOMMAND=stow --dotfiles --stow --adopt .
 export BREW=brew
+HOMEBREW_BUNDLE_FILE_GLOBAL=~/.Brewfiles/dev.Brewfile
 
 .PHONY: help
 help: ## Prints help for targets with comments
@@ -28,6 +29,7 @@ bundle-bump:  ## Update Brewfile
 
 .PHONY: Brewfile
 Brewfile: stow  ## Install Brew dependencies
+	HOMEBREW_BUNDLE_FILE_GLOBAL=${HOMEBREW_BUNDLE_FILE_GLOBAL} \
 	${BREW} bundle --global
 
 .PHONY: install
