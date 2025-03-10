@@ -2,4 +2,3 @@ alias make=gmake
 alias vi=nvim
 alias vim=nvim
 alias docker=podman
-alias code=neovim
