@@ -16,7 +16,7 @@ stow: dot-config/nvim ## Stow all dotfiles
 	${STOWCOMMAND} --target=$$HOME
 
 .PHONY: restow
-restow: dot-config/nvim ## Stow all dotfiles
+restow: dot-config/nvim ## Restow all dotfiles
 	${RESTOWCOMMAND} --target=$$HOME
 
 .PHONY: adopt
