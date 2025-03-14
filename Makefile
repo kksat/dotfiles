@@ -1,5 +1,6 @@
 export TESTFOLDER=./test/
 export STOWCOMMAND=stow --dotfiles --stow --adopt .
+export RESTOWCOMMAND=stow --dotfiles --restow --adopt .
 export BREW=brew
 HOMEBREW_BUNDLE_FILE_GLOBAL=~/.Brewfiles/dev.Brewfile
 
@@ -13,6 +14,10 @@ dot-config/nvim: ## Stow nvim
 .PHONY: stow
 stow: dot-config/nvim ## Stow all dotfiles
 	${STOWCOMMAND} --target=$$HOME
+
+.PHONY: restow
+restow: dot-config/nvim ## Stow all dotfiles
+	${RESTOWCOMMAND} --target=$$HOME
 
 .PHONY: adopt
 adopt: ## Adopt all dotfiles
