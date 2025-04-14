@@ -16,6 +16,10 @@ if [[ -s $HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh ]]; then
   . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
 fi
 
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=10000000
+SAVEHIST=10000000
+
 autoload -Uz compinit
 compinit
 source <(kubectl completion zsh)
