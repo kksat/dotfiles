@@ -30,6 +30,8 @@ export PATH="$PATH:$HOME/.local/bin"
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
-if command -v nvim; then
+if command -v nvim 1>/dev/null; then
   export EDITOR=nvim
+else
+  export EDITOR=vim
 fi
