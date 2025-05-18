@@ -1,4 +1,6 @@
-alias make=gmake
+if command -v gmake >/dev/null 2>&1; then
+  alias make=gmake
+fi
 
 if command -v nvim >/dev/null 2>&1; then
   alias vi=nvim
