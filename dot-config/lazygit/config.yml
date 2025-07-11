@@ -244,3 +244,12 @@ customCommands:
     context: files
     description: "Git Absorb"
     output: terminal
+  - key: "<c-g>"
+    context: "commits"
+    description: "Add gemini-cli as assistant"
+    command: |
+      commitHash="{{.SelectedLocalCommit.Hash}}" && \
+      newLine="Assisted-by: Gemini-CLI <https://github.com/google-gemini/gemini-cli>" && \
+      commitMessage=$(git show --quiet --format=%B $commitHash) && \
+      echo "$commitMessage" | grep -qF "$newLine" || \
+      git commit --amend -m "$(echo "$commitMessage"; echo "$newLine")"
