@@ -253,3 +253,19 @@ customCommands:
       commitMessage=$(git show --quiet --format=%B $commitHash) && \
       echo "$commitMessage" | grep -qF "$newLine" || \
       git commit --amend -m "$(echo "$commitMessage"; echo "$newLine")"
+  - key: "I"
+    context: "files"
+    prompts:
+      - type: "menu"
+        title: "Select AI Assistant"
+        key: "AIAssistant"
+        options:
+          - name: "Gemini-CLI"
+            description: "Gemini-CLI"
+            value: "Assisted-by: Gemini-CLI <https://github.com/google-gemini/gemini-cli>"
+          - name: "GitHub Copilot"
+            description: "GitHub Copilot"
+            value: "GitHub Copilot <https://github.com/features/copilot>"
+    command: 'git commit --message "{{.Form.AIAssistant}}"'
+    description: "Add AI assistant and commit"
+    loadingText: "Add AI assistant and commit"
