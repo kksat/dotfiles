@@ -238,8 +238,9 @@ keybinding:
     init: "i"
     update: "u"
     bulkMenu: "b"
-  customCommands:
-    - key: "b"
-      command: "git absorb"
-      context: files
-      description: "Git Absorb"
+customCommands:
+  - key: "b"
+    command: "git absorb --base main"
+    context: files
+    description: "Git Absorb"
+    output: terminal
