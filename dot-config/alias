@@ -5,7 +5,10 @@ fi
 if command -v nvim >/dev/null 2>&1; then
   alias vi=nvim
   alias vim=nvim
-  alias code=nvim
+fi
+
+if command -v opencode >/dev/null 2>&1; then
+  alias code=opencode
 fi
 
 alias docker=podman
