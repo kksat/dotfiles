@@ -37,3 +37,4 @@ else
 fi
 
 export XDG_CONFIG_HOME=~/.config
+export CLAUDE_CODE_USE_BEDROCK=1
