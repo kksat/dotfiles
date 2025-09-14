@@ -253,6 +253,15 @@ customCommands:
       commitMessage=$(git show --quiet --format=%B $commitHash) && \
       echo "$commitMessage" | grep -qF "$newLine" || \
       git commit --amend -m "$(echo "$commitMessage"; echo "$newLine")"
+  - key: "E"
+    context: "files"
+    prompts:
+      - type: "input"
+        title: "Empty commit message"
+        key: "Commit"
+        initialValue: ""
+    description: "Add empty commit"
+    command: "git commit --allow-empty -m '{{ .Form.Commit }}'"
   - key: "I"
     context: "files"
     prompts:
