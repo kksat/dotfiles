@@ -261,7 +261,7 @@ customCommands:
         key: "Commit"
         initialValue: ""
     description: "Add empty commit"
-    command: "git commit --allow-empty -m '{{ .Form.Commit }}'"
+    command: "git commit --signoff --allow-empty -m '{{ .Form.Commit }}'"
   - key: "I"
     context: "files"
     prompts:
