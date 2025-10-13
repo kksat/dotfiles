@@ -36,5 +36,9 @@ else
   export EDITOR=vim
 fi
 
+if command -v /opt/homebrew/bin/brew 1>/dev/null; then
+ export PATH="$(/opt/homebrew/bin/brew --prefix)/bin:${PATH}"
+fi
+
 export XDG_CONFIG_HOME=~/.config
 export CLAUDE_CODE_USE_BEDROCK=1
