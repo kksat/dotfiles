@@ -1,0 +1,5 @@
+if command -v /opt/homebrew/bin/brew 1>/dev/null; then
+ export PATH="$(/opt/homebrew/bin/brew --prefix)/bin:${PATH}"
+fi
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
