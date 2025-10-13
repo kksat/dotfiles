@@ -3,7 +3,12 @@ eval "$(zoxide init zsh)"
 
 . ~/.secrets
 
+if command -v /opt/homebrew/bin/brew 1>/dev/null; then
+ export PATH="$(/opt/homebrew/bin/brew --prefix)/bin:${PATH}"
+fi
+
 . "$HOME/.cargo/env"
+
 if [ -f "~/.secrets" ]; then source "~/.alias" ; fi
 . ~/.config/alias
 
@@ -34,10 +39,6 @@ if command -v nvim 1>/dev/null; then
   export EDITOR=nvim
 else
   export EDITOR=vim
-fi
-
-if command -v /opt/homebrew/bin/brew 1>/dev/null; then
- export PATH="$(/opt/homebrew/bin/brew --prefix)/bin:${PATH}"
 fi
 
 export XDG_CONFIG_HOME=~/.config
