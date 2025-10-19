@@ -1,2 +1,5 @@
 maximized = true
-neovim-bin = "/opt/homebrew/bin/nvim"
+title-hidden = true
+[font]
+normal = []
+size = 16.0
