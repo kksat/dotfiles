@@ -14,6 +14,11 @@ if [ -f "~/.secrets" ]; then source "~/.alias" ; fi
 
 if [ -f "~/yandex-cloud/completion.zsh.inc" ]; then source "~/yandex-cloud/completion.zsh.inc"; fi
 
+if command -v nvim 1>/dev/null; then
+  export EDITOR=nvim
+else
+  export EDITOR=vim
+fi
 
 . $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 zvm_after_init_commands+=('source <(fzf --zsh)')
@@ -34,12 +39,6 @@ export PATH="$PATH:$HOME/.local/bin"
 
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
-
-if command -v nvim 1>/dev/null; then
-  export EDITOR=nvim
-else
-  export EDITOR=vim
-fi
 
 export XDG_CONFIG_HOME=~/.config
 export CLAUDE_CODE_USE_BEDROCK=1
