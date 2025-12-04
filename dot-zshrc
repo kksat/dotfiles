@@ -42,3 +42,6 @@ export PATH=$PATH:$GOPATH/bin
 
 export XDG_CONFIG_HOME=~/.config
 export CLAUDE_CODE_USE_BEDROCK=1
+
+# Added by Antigravity
+export PATH="~/.antigravity/antigravity/bin:$PATH"
