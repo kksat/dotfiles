@@ -3,3 +3,6 @@
 [user]
 name = "Kirill Satarin"
 email = "22549266+kksat@users.noreply.github.com"
+
+[ui]
+editor = "nvim"
