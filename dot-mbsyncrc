@@ -1,0 +1,25 @@
+IMAPAccount personal
+Host imap.yandex.ru
+Port 993
+UserCmd "pass email/neomutt/imap_user"
+PassCmd "pass email/neomutt/password"
+TLSType IMAPS
+AuthMechs LOGIN
+
+IMAPStore personal-remote
+Account personal
+
+MaildirStore personal-local
+Path ~/mail
+Inbox ~/mail/INBOX
+SubFolders Verbatim
+
+Channel personal
+Far :personal-remote:
+Near :personal-local:
+Patterns *
+Expunge None
+CopyArrivalDate yes
+Sync All
+SyncState *
+Create Both
