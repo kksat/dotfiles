@@ -5,3 +5,4 @@ dot-tmux/plugins/tokyo-night-tmux
 dot-tmux/plugins/tmux-jump
 dot-config/nvim
 dot-config/aerc/accounts.conf
+dot-ssh/config.d
