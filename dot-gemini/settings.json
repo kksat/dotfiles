@@ -1,6 +1,17 @@
 {
-  "selectedAuthType": "gemini-api-key",
-  "theme": "Default",
-  "preferredEditor": "vim",
-  "autoAccept": true
+  "tools": {
+    "autoAccept": true
+  },
+  "general": {
+    "preferredEditor": "vim",
+    "vimMode": true
+  },
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "ui": {
+    "theme": "Default"
+  }
 }
