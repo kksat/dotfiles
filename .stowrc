@@ -12,3 +12,4 @@
 --ignore .devcontainer
 --ignore dot-config/nvim/.git
 --ignore dot-config/nvim/.gitignore
+--ignore .claude/
