@@ -1,1 +1,4 @@
 bind -x '"\C-l"':clear
+bind '"^A" beginning-of-line'
+bind '"^E" end-of-line'
+bind '"^K" kill-line'
