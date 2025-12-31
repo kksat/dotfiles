@@ -1,4 +1,5 @@
 bind -x '"\C-l"':clear
+bind -x '"\C-L"':'tmux popup -E -w 100% -h 100% lazygit'
 bind '"^A" beginning-of-line'
 bind '"^E" end-of-line'
 bind '"^K" kill-line'
