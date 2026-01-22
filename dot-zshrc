@@ -1,18 +1,27 @@
-eval "$(/opt/homebrew/bin/brew shellenv)"
-eval "$(zoxide init zsh)"
-
-. ~/.secrets
-
-if command -v /opt/homebrew/bin/brew 1>/dev/null; then
- export PATH="$(/opt/homebrew/bin/brew --prefix)/bin:${PATH}"
+if [ -x /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-. "$HOME/.cargo/env"
+eval "$(zoxide init zsh)"
 
-if [ -f "~/.secrets" ]; then source "~/.alias" ; fi
-. ~/.config/alias
+if [ -f "$HOME/.secrets" ]; then
+  . "$HOME/.secrets"
+fi
 
-if [ -f "~/yandex-cloud/completion.zsh.inc" ]; then source "~/yandex-cloud/completion.zsh.inc"; fi
+if [ -f "$HOME/.cargo/env" ]; then
+  . "$HOME/.cargo/env"
+fi
+
+if [ -f "$HOME/.alias" ]; then
+  . "$HOME/.alias"
+fi
+. "$HOME/.config/alias"
+
+if [ -f "$HOME/yandex-cloud/completion.zsh.inc" ]; then
+  . "$HOME/yandex-cloud/completion.zsh.inc"
+fi
 
 if command -v nvim 1>/dev/null; then
   export EDITOR=nvim
@@ -35,13 +44,7 @@ autoload -Uz compinit
 compinit
 source <(kubectl completion zsh)
 
-export PATH="$PATH:$HOME/.local/bin"
-
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-
-export XDG_CONFIG_HOME=~/.config
+export XDG_CONFIG_HOME="$HOME/.config"
+export GOPATH="$HOME/go"
+export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$HOME/.antigravity/antigravity/bin"
 export CLAUDE_CODE_USE_BEDROCK=1
-
-# Added by Antigravity
-export PATH="~/.antigravity/antigravity/bin:$PATH"
