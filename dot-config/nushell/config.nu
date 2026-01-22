@@ -17,4 +17,24 @@
 # You can remove these comments if you want or leave
 # them for future reference.
 #
+let home = $env.HOME
+$env.XDG_CONFIG_HOME = $"($home)/.config"
+$env.GOPATH = $"($home)/go"
+$env.CLAUDE_CODE_USE_BEDROCK = "1"
+
+let local_paths = [
+  $"($home)/.local/bin"
+  $"($home)/go/bin"
+  $"($home)/.cargo/bin"
+  $"($home)/.antigravity/antigravity/bin"
+]
+$env.PATH = ($env.PATH | append $local_paths | uniq)
+
+if ("/opt/homebrew/bin" | path exists) {
+  $env.PATH = ($env.PATH | prepend "/opt/homebrew/bin" | prepend "/opt/homebrew/sbin" | uniq)
+} else if ("/home/linuxbrew/.linuxbrew/bin" | path exists) {
+  $env.PATH = ($env.PATH | prepend "/home/linuxbrew/.linuxbrew/bin" | prepend "/home/linuxbrew/.linuxbrew/sbin" | uniq)
+}
+
+$env.EDITOR = (if (which nvim | is-empty) { "vim" } else { "nvim" })
 $env.config.edit_mode = 'vi'
