@@ -6,3 +6,4 @@ dot-tmux/plugins/tmux-jump
 dot-config/nvim
 dot-config/aerc/accounts.conf
 dot-ssh/config.d
+Library/Preferences/com.raycast.macos.plist
