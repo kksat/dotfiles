@@ -41,4 +41,4 @@ Brewfile: stow  ## Install Brew dependencies
 	${BREW} bundle --global
 
 .PHONY: install
-install: Brewfile stow  ## Install everything
+install: Brewfile ## Install everything
