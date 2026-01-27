@@ -16,6 +16,9 @@ web_search_request = true
 skills = true
 shell_snapshot = true
 
+[shell_environment_policy]
+set = { LLM = "1" }
+
 [projects."~/dev/"]
 trust_level = "trusted"
 
