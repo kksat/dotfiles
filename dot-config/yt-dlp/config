@@ -1,0 +1,3 @@
+--cookies-from-browser brave
+--js-runtimes node
+--remote-components ejs:github
