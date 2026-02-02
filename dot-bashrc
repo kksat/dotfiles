@@ -20,6 +20,8 @@ if [ -f "$HOME/.cargo/env" ]; then
   . "$HOME/.cargo/env"
 fi
 
+complete -W "\`grep -oE '^[a-zA-Z0-9_.-]+:([^=]|$)' ?akefile | sed 's/[^a-zA-Z0-9_.-]*$//'\`" make
+
 export XDG_CONFIG_HOME="$HOME/.config"
 export GOPATH="$HOME/go"
 export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$HOME/.antigravity/antigravity/bin"
