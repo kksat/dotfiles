@@ -1,4 +1,5 @@
 command = /opt/homebrew/bin/tmux
 font-family = "Fira Code"
 macos-titlebar-proxy-icon = hidden
+window-show-tab-bar = never
 title = " "
