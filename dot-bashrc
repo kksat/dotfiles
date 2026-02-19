@@ -16,6 +16,10 @@ else
   export EDITOR=vim
 fi
 
+if command -v just >/dev/null 2>&1; then
+  eval "$(just --completions bash)"
+fi
+
 if [ -f "$HOME/.cargo/env" ]; then
   . "$HOME/.cargo/env"
 fi
