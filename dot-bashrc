@@ -10,6 +10,16 @@ elif [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
+if command -v fzf >/dev/null 2>&1; then
+  if [ -f "$HOME/.fzf.bash" ]; then
+    . "$HOME/.fzf.bash"
+  elif [ -f /opt/homebrew/opt/fzf/shell/key-bindings.bash ]; then
+    . /opt/homebrew/opt/fzf/shell/key-bindings.bash
+  elif [ -f /usr/share/fzf/key-bindings.bash ]; then
+    . /usr/share/fzf/key-bindings.bash
+  fi
+fi
+
 if command -v nvim >/dev/null 2>&1; then
   export EDITOR=nvim
 else
