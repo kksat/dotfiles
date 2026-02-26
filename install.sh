@@ -1,16 +1,20 @@
 #!/bin/bash
 set -euo pipefail
 
-sudo apt-get install build-essential
+function install_brew() {
+  sudo apt-get install build-essential
+  if ! command -v brew &> /dev/null; then
+    echo "Homebrew not found. Installing Homebrew..."
+    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # shellcheck disable=SC2016
+    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  else
+    echo "Homebrew is already installed."
+  fi
+}
 
-NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-echo >> ~/.bashrc
-
-# shellcheck disable=SC2016
-echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc  
-
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+install_brew
 
 brew install stow
 
