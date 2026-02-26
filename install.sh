@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# This is installation script for github codespaces
+
 set -euo pipefail
 
 function install_brew() {
