@@ -3,6 +3,17 @@ bind -x '"\C-g"':'tmux popup -E -w 100% -h 100% lazygit'
 bind '"^A" beginning-of-line'
 bind '"^E" end-of-line'
 bind '"^K" kill-line'
+bind '"\C-n" next-history'
+bind '"\C-p" previous-history'
+bind '"\C-r" reverse-search-history'
+bind '"\C-s" forward-search-history'
+bind '"\C-w" backward-kill-word'
+bind '"\C-u" unix-line-discard'
+bind '"\C-b" backward-word'
+bind '"\M-b" backward-word'
+bind '"\M-f" forward-word'
+bind '"\C-f" forward-word'
+bind '"\M-d" kill-word'
 
 if [ -x /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
