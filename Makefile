@@ -40,5 +40,10 @@ Brewfile: stow  ## Install Brew dependencies
 	HOMEBREW_BUNDLE_FILE_GLOBAL=${HOMEBREW_BUNDLE_FILE_GLOBAL} \
 	${BREW} bundle --global
 
+.PHONY: codespaces.Brewfile
+codespaces.Brewfile: stow  ## Install Brew codespaces dependencies
+	HOMEBREW_BUNDLE_FILE_GLOBAL=~/.Brewfiles/codespaces.Brewfile \
+	${BREW} bundle --global
+
 .PHONY: install
-install: Brewfile ## Install everything
+install: codespaces.Brewfile ## Install everything
