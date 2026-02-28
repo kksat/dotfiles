@@ -47,3 +47,4 @@ codespaces.Brewfile: stow  ## Install Brew codespaces dependencies
 
 .PHONY: install
 install: codespaces.Brewfile ## Install everything
+	nvim --headless "+Lazy! sync" +qa
