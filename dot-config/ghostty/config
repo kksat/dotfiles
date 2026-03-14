@@ -1,4 +1,3 @@
-command = /opt/homebrew/bin/tmux
 font-family = "Fira Code"
 font-size = 16
 macos-titlebar-proxy-icon = hidden
