@@ -1,19 +1,27 @@
 {
-  "model": "eu.anthropic.claude-opus-4-6-v1[1m]",
-  "hooks": {
-    "UserPromptSubmit": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/user-prompt-submit.bash"
-          }
-        ]
-      }
-    ]
+  "permissions": {
+    "allow": [
+      "Bash(xargs:*)",
+      "Bash(uv run:*)",
+      "Bash(hugo version:*)",
+      "Bash(hugo:*)",
+      "Bash(just docusaurus-docs:*)",
+      "Bash(npm run:*)",
+      "WebFetch(domain:starlight.astro.build)",
+      "Bash(just starlight-docs:*)",
+      "Bash(npx vercel@latest:*)",
+      "Bash(git:*)",
+      "Bash(uv:*)",
+      "Bash(just lint:*)",
+      "Bash(git stash:*)",
+      "Bash(pip show:*)"
+    ],
+    "defaultMode": "acceptEdits"
   },
+  "model": "eu.anthropic.claude-opus-4-6-v1[1m]",
   "enabledPlugins": {
-    "pyright-lsp@claude-plugins-official": true
-  }
+    "pyright-lsp@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": true
+  },
+  "skipDangerousModePermissionPrompt": true
 }
