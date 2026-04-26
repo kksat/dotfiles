@@ -18,3 +18,4 @@ fi
 
 alias docker=podman
 alias k=kubectl
+alias cc=claude --allow-dangerously-skip-permissions
