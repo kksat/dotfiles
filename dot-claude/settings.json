@@ -1,4 +1,9 @@
 {
+  "allowedTools": [
+    "Read",
+    "Glob",
+    "Grep"
+  ],
   "permissions": {
     "allow": [
       "Bash(xargs:*)",
