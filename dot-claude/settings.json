@@ -23,7 +23,7 @@
     ],
     "defaultMode": "acceptEdits"
   },
-  "model": "eu.anthropic.claude-opus-4-6-v1[1m]",
+  "model": "us.anthropic.claude-opus-4-7",
   "enabledPlugins": {
     "pyright-lsp@claude-plugins-official": true,
     "gopls-lsp@claude-plugins-official": true
