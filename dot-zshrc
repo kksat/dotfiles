@@ -48,3 +48,8 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export GOPATH="$HOME/go"
 export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$HOME/.antigravity/antigravity/bin"
 export CLAUDE_CODE_USE_BEDROCK=1
+
+# The next line updates PATH for YDB CLI.
+if [ -f '~/ydb/path.bash.inc' ]; then source '~/ydb/path.bash.inc'; 
+_ydb_comp="${XDG_DATA_HOME:-$HOME/.local/share}/ydb/completion.zsh.inc" && [ -f "$_ydb_comp" ] && source "$_ydb_comp"
+fi
