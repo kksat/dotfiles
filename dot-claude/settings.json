@@ -1,9 +1,4 @@
 {
-  "allowedTools": [
-    "Read",
-    "Glob",
-    "Grep"
-  ],
   "permissions": {
     "allow": [
       "Read(//**)",
@@ -24,10 +19,16 @@
     ],
     "defaultMode": "acceptEdits"
   },
-  "model": "us.anthropic.claude-opus-4-7",
+  "model": "us.anthropic.claude-opus-4-6-v1",
   "enabledPlugins": {
     "pyright-lsp@claude-plugins-official": true,
     "gopls-lsp@claude-plugins-official": true
   },
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "allowedTools": [
+    "Read",
+    "Glob",
+    "Grep"
+  ],
+  "editorMode": "vim"
 }
