@@ -53,3 +53,20 @@ export CLAUDE_CODE_USE_BEDROCK=1
 if [ -f '~/ydb/path.bash.inc' ]; then source '~/ydb/path.bash.inc'; 
 _ydb_comp="${XDG_DATA_HOME:-$HOME/.local/share}/ydb/completion.zsh.inc" && [ -f "$_ydb_comp" ] && source "$_ydb_comp"
 fi
+
+# The next line updates PATH for YDB CLI.
+if [ -f '$HOME/ydb/path.bash.inc' ]; then source '$HOME/ydb/path.bash.inc'; fi
+
+# Added by Antigravity CLI installer
+export PATH="$HOME/.local/bin:$PATH"
+# kimi-code
+export PATH="$HOME/.kimi-code/bin:$PATH"
+
+# openjdk@21 (for Firebase emulators / Java)
+export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
+
+export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"
+export PATH="$ANDROID_SDK_ROOT/platform-tools:$PATH"
+
+# Entire CLI shell completion
+autoload -Uz compinit && compinit && source <(entire completion zsh)
