@@ -57,3 +57,5 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export GOPATH="$HOME/go"
 export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$HOME/.antigravity/antigravity/bin"
 export CLAUDE_CODE_USE_BEDROCK=1
+
+export PATH="~/.local/bin:$PATH"
