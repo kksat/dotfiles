@@ -19,19 +19,7 @@ run_sudo() {
 }
 
 echo "=== [1/6] Installing system dependencies from package list ==="
-if command -v bindep &>/dev/null && [ -f "$SCRIPT_DIR/bindep.txt" ]; then
-  echo "Using bindep to determine missing packages..."
-  PACKAGES=$(bindep -b -f "$SCRIPT_DIR/bindep.txt" 2>/dev/null || true)
-  if [ -n "$PACKAGES" ]; then
-    if command -v apt-get &>/dev/null; then
-      export DEBIAN_FRONTEND=noninteractive
-      run_sudo apt-get update -y
-      run_sudo apt-get install -y --no-install-recommends $PACKAGES
-    elif command -v dnf &>/dev/null; then
-      run_sudo dnf install -y $PACKAGES || true
-    fi
-  fi
-elif command -v apt-get &>/dev/null && [ -f "$SCRIPT_DIR/packages/ubuntu.txt" ]; then
+if command -v apt-get &>/dev/null && [ -f "$SCRIPT_DIR/packages/ubuntu.txt" ]; then
   export DEBIAN_FRONTEND=noninteractive
   run_sudo apt-get update -y
   PACKAGES=$(grep -v -E '^\s*#|^\s*$' "$SCRIPT_DIR/packages/ubuntu.txt" | tr '\n' ' ')
