@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Installation script for GitHub Codespaces / Devcontainers
-# Ensures dotfiles, pi (coding agent), and neovim with all dependencies are installed.
+# Ensures dotfiles, Homebrew, pi coding agent, and neovim with all dependencies are installed.
 
 set -euo pipefail
 
@@ -18,38 +18,27 @@ run_sudo() {
   fi
 }
 
-echo "=== [1/6] Installing system dependencies ==="
-if command -v apt-get &>/dev/null; then
+echo "=== [1/6] Installing system dependencies from package list ==="
+if command -v bindep &>/dev/null && [ -f "$SCRIPT_DIR/bindep.txt" ]; then
+  echo "Using bindep to determine missing packages..."
+  PACKAGES=$(bindep -b -f "$SCRIPT_DIR/bindep.txt" 2>/dev/null || true)
+  if [ -n "$PACKAGES" ]; then
+    if command -v apt-get &>/dev/null; then
+      export DEBIAN_FRONTEND=noninteractive
+      run_sudo apt-get update -y
+      run_sudo apt-get install -y --no-install-recommends $PACKAGES
+    elif command -v dnf &>/dev/null; then
+      run_sudo dnf install -y $PACKAGES || true
+    fi
+  fi
+elif command -v apt-get &>/dev/null && [ -f "$SCRIPT_DIR/packages/ubuntu.txt" ]; then
   export DEBIAN_FRONTEND=noninteractive
   run_sudo apt-get update -y
-  run_sudo apt-get install -y --no-install-recommends \
-    build-essential \
-    curl \
-    git \
-    unzip \
-    tar \
-    gzip \
-    ripgrep \
-    fd-find \
-    python3 \
-    python3-pip \
-    python3-venv \
-    stow
-elif command -v dnf &>/dev/null; then
-  run_sudo dnf install -y \
-    gcc \
-    gcc-c++ \
-    make \
-    git \
-    curl \
-    tar \
-    gzip \
-    unzip \
-    ripgrep \
-    fd-find \
-    python3 \
-    python3-pip \
-    stow || true
+  PACKAGES=$(grep -v -E '^\s*#|^\s*$' "$SCRIPT_DIR/packages/ubuntu.txt" | tr '\n' ' ')
+  run_sudo apt-get install -y --no-install-recommends $PACKAGES
+elif command -v dnf &>/dev/null && [ -f "$SCRIPT_DIR/packages/fedora.txt" ]; then
+  PACKAGES=$(grep -v -E '^\s*#|^\s*$' "$SCRIPT_DIR/packages/fedora.txt" | tr '\n' ' ')
+  run_sudo dnf install -y $PACKAGES || true
 fi
 
 # Ensure fd is available in PATH (Debian/Ubuntu names binary fdfind)
@@ -57,48 +46,33 @@ if command -v fdfind &>/dev/null && ! command -v fd &>/dev/null; then
   run_sudo ln -sf "$(command -v fdfind)" /usr/local/bin/fd
 fi
 
-echo "=== [2/6] Ensuring Node.js and npm are installed ==="
-NEED_NODE=false
-if ! command -v node &>/dev/null || ! command -v npm &>/dev/null; then
-  NEED_NODE=true
-else
-  NODE_MAJOR="$(node -v | sed 's/v\([0-9]*\).*/\1/')"
-  if [ "${NODE_MAJOR:-0}" -lt 18 ]; then
-    NEED_NODE=true
-  fi
-fi
-
-if [ "$NEED_NODE" = true ]; then
-  echo "Installing Node.js LTS..."
-  if command -v apt-get &>/dev/null; then
-    curl -fsSL https://deb.nodesource.com/setup_22.x | run_sudo -E bash -
-    run_sudo apt-get install -y nodejs
-  fi
-fi
-
-echo "Node version: $(node -v)"
-echo "NPM version:  $(npm -v)"
-
-echo "=== [3/6] Installing pi coding agent and companions ==="
-if ! command -v pi &>/dev/null; then
-  echo "Installing @earendil-works/pi-coding-agent..."
-  if [ "$(id -u)" -eq 0 ]; then
-    npm install -g @earendil-works/pi-coding-agent
+echo "=== [2/6] Installing Homebrew and pi coding agent ==="
+if ! command -v brew &>/dev/null; then
+  if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  elif [ -x /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
   else
-    run_sudo npm install -g @earendil-works/pi-coding-agent
+    echo "Homebrew not found. Installing Homebrew..."
+    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    fi
   fi
-else
-  echo "pi is already installed: $(pi --version 2>/dev/null || echo 'present')"
 fi
 
-# Install opencode CLI for opencode.nvim plugin
-if ! command -v opencode &>/dev/null; then
-  echo "Installing opencode-ai CLI..."
-  if [ "$(id -u)" -eq 0 ]; then
-    npm install -g opencode-ai || true
-  else
-    run_sudo npm install -g opencode-ai || true
-  fi
+if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+elif [ -x /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+echo "Installing pi coding agent via Homebrew..."
+brew install pi-coding-agent
+
+echo "=== [3/6] Installing Codespaces packages via Homebrew bundle ==="
+if [ -f "$SCRIPT_DIR/dot-Brewfiles/codespaces.Brewfile" ]; then
+  brew bundle --file="$SCRIPT_DIR/dot-Brewfiles/codespaces.Brewfile" || true
 fi
 
 echo "=== [4/6] Ensuring modern Neovim (>= 0.10) is installed ==="
@@ -135,7 +109,7 @@ if [ "$NEED_NVIM" = true ]; then
   rm -rf "$TMP_NVIM"
 fi
 
-echo "Neovim version: $(nvim --version | head -n 1)"
+echo "Neovim version: $(nvim --version 2>/dev/null | head -n 1 || echo 'unknown')"
 
 echo "=== [5/6] Setting up dotfiles ==="
 # Clone kksat/nvim configuration if missing
@@ -167,10 +141,10 @@ echo "=== Verification ==="
 echo "pi location:      $(command -v pi || echo 'not found')"
 echo "pi version:       $(pi --version 2>/dev/null || echo 'unknown')"
 echo "nvim location:    $(command -v nvim || echo 'not found')"
-echo "nvim version:     $(nvim --version | head -n 1)"
+echo "nvim version:     $(nvim --version 2>/dev/null | head -n 1 || echo 'unknown')"
 echo "ripgrep location: $(command -v rg || echo 'not found')"
 echo "fd location:      $(command -v fd || echo 'not found')"
 echo "stow location:    $(command -v stow || echo 'not found')"
+echo "brew location:    $(command -v brew || echo 'not found')"
 
 echo "=== Dotfiles and dependencies installation complete! ==="
-

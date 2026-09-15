@@ -1,0 +1,23 @@
+# Fedora / RHEL / CentOS system packages for dotfiles, neovim, and dev tools
+
+# Build tools & system essentials
+gcc
+gcc-c++
+make
+procps-ng
+curl
+git
+unzip
+tar
+gzip
+
+# Fast search tools
+ripgrep
+fd-find
+
+# Python runtime and environment
+python3
+python3-pip
+
+# Symlink management
+stow

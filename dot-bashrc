@@ -23,6 +23,10 @@ elif [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
+if [ -f "$HOME/.secrets" ]; then
+  . "$HOME/.secrets"
+fi
+
 if command -v fzf >/dev/null 2>&1; then
   if [ -f "$HOME/.fzf.bash" ]; then
     . "$HOME/.fzf.bash"
