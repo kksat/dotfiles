@@ -8,3 +8,10 @@ dot-config/aerc/accounts.conf
 dot-ssh/config.d
 Library/Preferences/com.raycast.macos.plist
 .antigravitycli
+dot-pi/agent/auth.json
+dot-pi/agent/sessions
+dot-pi/agent/models-store.json
+dot-pi/agent/mcp-cache.json
+dot-pi/agent/npm
+dot-pi/agent/git
+dot-pi/**/node_modules

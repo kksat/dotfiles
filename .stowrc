@@ -13,3 +13,5 @@
 --ignore dot-config/nvim/.git
 --ignore dot-config/nvim/.gitignore
 --ignore .claude/
+--ignore packages
+--ignore .secrets.example

@@ -1,0 +1,9 @@
+{
+  "enabled": true,
+  "startMode": "normal",
+  "enableJkEscape": false,
+  "syncClipboard": true,
+  "cursorShape": true,
+  "showModeBadge": true,
+  "showPosition": true
+}

@@ -47,7 +47,7 @@ codespaces.Brewfile: stow  ## Install Brew codespaces dependencies
 
 .PHONY: pi
 pi: ## Install pi coding agent
-	npm install -g @earendil-works/pi-coding-agent
+	brew install pi-coding-agent
 
 .PHONY: nvim
 nvim: dot-config/nvim ## Install and sync nvim plugins

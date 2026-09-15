@@ -1,0 +1,188 @@
+[
+  {
+    "id": "auto",
+    "name": "Auto",
+    "contextWindow": 400000,
+    "reasoning": false
+  },
+  {
+    "id": "composer-2.5",
+    "name": "Composer 2.5",
+    "contextWindow": 400000,
+    "reasoning": false
+  },
+  {
+    "id": "cursor-grok-4.5-high",
+    "name": "Cursor Grok 4.5",
+    "contextWindow": 400000,
+    "reasoning": false
+  },
+  {
+    "id": "claude-sonnet-5-thinking-high",
+    "name": "Claude Sonnet 5 Thinking",
+    "contextWindow": 1000000,
+    "reasoning": true
+  },
+  {
+    "id": "claude-sonnet-5-thinking-xhigh",
+    "name": "Claude Sonnet 5 Extra High Thinking",
+    "contextWindow": 1000000,
+    "reasoning": true
+  },
+  {
+    "id": "cursor-grok-4.6-low",
+    "name": "Cursor Grok 4.6 Low",
+    "contextWindow": 400000,
+    "reasoning": false
+  },
+  {
+    "id": "cursor-grok-4.6-medium",
+    "name": "Cursor Grok 4.6 Medium",
+    "contextWindow": 400000,
+    "reasoning": false
+  },
+  {
+    "id": "cursor-grok-4.6-high",
+    "name": "Cursor Grok 4.6",
+    "contextWindow": 400000,
+    "reasoning": false
+  },
+  {
+    "id": "cursor-grok-4.6-xhigh",
+    "name": "Cursor Grok 4.6 Extra High",
+    "contextWindow": 400000,
+    "reasoning": false
+  },
+  {
+    "id": "cursor-grok-4.5-low",
+    "name": "Cursor Grok 4.5 Low",
+    "contextWindow": 400000,
+    "reasoning": false
+  },
+  {
+    "id": "cursor-grok-4.5-medium",
+    "name": "Cursor Grok 4.5 Medium",
+    "contextWindow": 400000,
+    "reasoning": false
+  },
+  {
+    "id": "claude-sonnet-5-low",
+    "name": "Claude Sonnet 5 Low",
+    "contextWindow": 1000000,
+    "reasoning": false
+  },
+  {
+    "id": "claude-sonnet-5-medium",
+    "name": "Claude Sonnet 5 Medium",
+    "contextWindow": 1000000,
+    "reasoning": false
+  },
+  {
+    "id": "claude-sonnet-5-high",
+    "name": "Claude Sonnet 5",
+    "contextWindow": 1000000,
+    "reasoning": false
+  },
+  {
+    "id": "claude-sonnet-5-xhigh",
+    "name": "Claude Sonnet 5 Extra High",
+    "contextWindow": 1000000,
+    "reasoning": false
+  },
+  {
+    "id": "claude-sonnet-5-thinking-low",
+    "name": "Claude Sonnet 5 Low Thinking",
+    "contextWindow": 1000000,
+    "reasoning": true
+  },
+  {
+    "id": "claude-sonnet-5-thinking-medium",
+    "name": "Claude Sonnet 5 Medium Thinking",
+    "contextWindow": 1000000,
+    "reasoning": true
+  },
+  {
+    "id": "claude-4.6-sonnet-medium",
+    "name": "Claude Sonnet 4.6",
+    "contextWindow": 1000000,
+    "reasoning": false
+  },
+  {
+    "id": "claude-4.6-sonnet-medium-thinking",
+    "name": "Claude Sonnet 4.6 Thinking",
+    "contextWindow": 1000000,
+    "reasoning": true
+  },
+  {
+    "id": "claude-4.6-opus-high",
+    "name": "Claude Opus 4.6",
+    "contextWindow": 1000000,
+    "reasoning": false
+  },
+  {
+    "id": "claude-4.6-opus-max",
+    "name": "Claude Opus 4.6 Max",
+    "contextWindow": 1000000,
+    "reasoning": false
+  },
+  {
+    "id": "claude-4.6-opus-high-thinking",
+    "name": "Claude Opus 4.6 Thinking",
+    "contextWindow": 1000000,
+    "reasoning": true
+  },
+  {
+    "id": "claude-4.6-opus-max-thinking",
+    "name": "Claude Opus 4.6 Max Thinking",
+    "contextWindow": 1000000,
+    "reasoning": true
+  },
+  {
+    "id": "claude-4.5-opus-high",
+    "name": "Claude Opus 4.5",
+    "contextWindow": 400000,
+    "reasoning": false
+  },
+  {
+    "id": "claude-4.5-opus-high-thinking",
+    "name": "Claude Opus 4.5 Thinking",
+    "contextWindow": 400000,
+    "reasoning": true
+  },
+  {
+    "id": "gemini-3.1-pro",
+    "name": "Gemini 3.1 Pro",
+    "contextWindow": 400000,
+    "reasoning": false
+  },
+  {
+    "id": "claude-4.5-sonnet",
+    "name": "Claude Sonnet 4.5",
+    "contextWindow": 400000,
+    "reasoning": false
+  },
+  {
+    "id": "claude-4.5-sonnet-thinking",
+    "name": "Claude Sonnet 4.5 Thinking",
+    "contextWindow": 400000,
+    "reasoning": true
+  },
+  {
+    "id": "gemini-3-flash",
+    "name": "Gemini 3 Flash",
+    "contextWindow": 400000,
+    "reasoning": false
+  },
+  {
+    "id": "claude-4-sonnet",
+    "name": "Claude Sonnet 4",
+    "contextWindow": 400000,
+    "reasoning": false
+  },
+  {
+    "id": "claude-4-sonnet-thinking",
+    "name": "Claude Sonnet 4 Thinking",
+    "contextWindow": 400000,
+    "reasoning": true
+  }
+]

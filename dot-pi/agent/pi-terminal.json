@@ -1,0 +1,12 @@
+{
+  "terminals": [
+    {
+      "key": "alt+t"
+    },
+    {
+      "key": "alt+e",
+      "command": "nvim",
+      "name": "editor"
+    }
+  ]
+}

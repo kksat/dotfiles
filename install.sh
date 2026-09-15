@@ -99,12 +99,19 @@ fi
 
 echo "Neovim version: $(nvim --version 2>/dev/null | head -n 1 || echo 'unknown')"
 
-echo "=== [5/6] Setting up dotfiles ==="
+echo "=== [5/7] Setting up dotfiles ==="
 # Clone kksat/nvim configuration if missing
 if [ ! -d "dot-config/nvim" ]; then
   echo "Cloning kksat/nvim..."
   mkdir -p dot-config
   git clone https://github.com/kksat/nvim.git dot-config/nvim
+fi
+
+# Clone pi-agent-extensions repository if missing (used by pi settings.json packages)
+if [ ! -d "$HOME/dev/pi-agent-extensions" ]; then
+  echo "Cloning pi-agent-extensions..."
+  mkdir -p "$HOME/dev"
+  git clone https://github.com/kksat/pi-agent-extensions.git "$HOME/dev/pi-agent-extensions" || true
 fi
 
 # Update submodules if possible
@@ -117,12 +124,26 @@ for f in .bashrc .zshrc .zprofile .profile .bash_profile .bash_login; do
   fi
 done
 
+# Ensure target directories exist and remove regular files if any to allow symlinking
+mkdir -p "$HOME/.pi/agent"
+for f in cursor-models.json keybindings.json models.json pi-terminal.json settings.json vim.json; do
+  if [ -f "$HOME/.pi/agent/$f" ] && [ ! -L "$HOME/.pi/agent/$f" ]; then
+    rm -f "$HOME/.pi/agent/$f"
+  fi
+done
+
 if command -v stow &>/dev/null; then
   echo "Stowing dotfiles to $HOME..."
   stow --dotfiles --restow . --target="$HOME"
 fi
 
-echo "=== [6/6] Syncing Neovim plugins ==="
+echo "=== [6/7] Installing Pi extensions and packages ==="
+if command -v pi &>/dev/null; then
+  echo "Reconciling Pi packages..."
+  pi update --extensions || true
+fi
+
+echo "=== [7/7] Syncing Neovim plugins ==="
 nvim --headless "+Lazy! sync" +qa || true
 
 echo "=== Verification ==="
