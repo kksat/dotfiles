@@ -1,6 +1,6 @@
 [submodule "tpm"]
 	path = dot-tmux/plugins/tpm
-	url = git@github.com:tmux-plugins/tpm.git
+	url = https://github.com/tmux-plugins/tpm.git
 [submodule "opencode-config"]
 	path = dot-config/opencode
-	url = git@github.com:kksat/opencode-config.git
+	url = https://github.com/kksat/opencode-config.git

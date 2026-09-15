@@ -45,6 +45,14 @@ codespaces.Brewfile: stow  ## Install Brew codespaces dependencies
 	HOMEBREW_BUNDLE_FILE_GLOBAL=~/.Brewfiles/codespaces.Brewfile \
 	${BREW} bundle --global
 
-.PHONY: install
-install: codespaces.Brewfile ## Install everything
+.PHONY: pi
+pi: ## Install pi coding agent
+	npm install -g @earendil-works/pi-coding-agent
+
+.PHONY: nvim
+nvim: dot-config/nvim ## Install and sync nvim plugins
 	nvim --headless "+Lazy! sync" +qa
+
+.PHONY: install
+install: ## Install dotfiles, pi, and nvim with all dependencies
+	./install.sh

@@ -4,7 +4,9 @@ elif [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-eval "$(zoxide init zsh)"
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+fi
 
 if [ -f "$HOME/.secrets" ]; then
   . "$HOME/.secrets"
@@ -29,8 +31,10 @@ else
   export EDITOR=vim
 fi
 
-. $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-zvm_after_init_commands+=('source <(fzf --zsh)')
+if command -v brew >/dev/null 2>&1 && [ -f "$(brew --prefix 2>/dev/null)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh" ]; then
+  . "$(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+  zvm_after_init_commands+=('source <(fzf --zsh)')
+fi
 
 if [[ -s $HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh ]]; then
   . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
@@ -42,7 +46,10 @@ SAVEHIST=10000000
 
 autoload -Uz compinit
 compinit
-source <(kubectl completion zsh)
+
+if command -v kubectl >/dev/null 2>&1; then
+  source <(kubectl completion zsh)
+fi
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export GOPATH="$HOME/go"
@@ -69,4 +76,6 @@ export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"
 export PATH="$ANDROID_SDK_ROOT/platform-tools:$PATH"
 
 # Entire CLI shell completion
-autoload -Uz compinit && compinit && source <(entire completion zsh)
+if command -v entire >/dev/null 2>&1; then
+  autoload -Uz compinit && compinit && source <(entire completion zsh)
+fi
