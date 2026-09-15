@@ -19,16 +19,25 @@
     ],
     "defaultMode": "acceptEdits"
   },
-  "model": "us.anthropic.claude-opus-4-6-v1",
   "enabledPlugins": {
     "pyright-lsp@claude-plugins-official": true,
-    "gopls-lsp@claude-plugins-official": true
+    "gopls-lsp@claude-plugins-official": true,
+    "open-code-review@open-code-review": true
+  },
+  "extraKnownMarketplaces": {
+    "open-code-review": {
+      "source": {
+        "source": "github",
+        "repo": "alibaba/open-code-review"
+      }
+    }
   },
   "skipDangerousModePermissionPrompt": true,
+  "editorMode": "vim",
   "allowedTools": [
     "Read",
     "Glob",
     "Grep"
   ],
-  "editorMode": "vim"
+  "model": "us.anthropic.claude-opus-4-7"
 }
