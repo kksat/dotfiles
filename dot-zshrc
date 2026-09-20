@@ -1,14 +1,20 @@
-if [ -x /opt/homebrew/bin/brew ]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-elif [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# --- Homebrew ---------------------------------------------------------------
+# .zprofile already runs this for login shells; guard for non-login shells.
+if [ -z "$HOMEBREW_PREFIX" ]; then
+  if [ -x /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  fi
 fi
 
+# --- Tools ------------------------------------------------------------------
 if command -v zoxide >/dev/null 2>&1; then
   eval "$(zoxide init zsh)"
 fi
 
-if [ -f "$HOME/.secrets" ]; then
+# .zprofile already sources this for login shells; guard for non-login shells.
+if [ -z "$ARA_API_CLIENT" ] && [ -f "$HOME/.secrets" ]; then
   . "$HOME/.secrets"
 fi
 
@@ -21,18 +27,16 @@ if [ -f "$HOME/.alias" ]; then
 fi
 . "$HOME/.config/alias"
 
-if [ -f "$HOME/yandex-cloud/completion.zsh.inc" ]; then
-  . "$HOME/yandex-cloud/completion.zsh.inc"
-fi
-
+# --- Editor -----------------------------------------------------------------
 if command -v nvim 1>/dev/null; then
   export EDITOR=nvim
 else
   export EDITOR=vim
 fi
 
-if command -v brew >/dev/null 2>&1 && [ -f "$(brew --prefix 2>/dev/null)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh" ]; then
-  . "$(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+# --- zsh-vi-mode ------------------------------------------------------------
+if [[ -f "$HOMEBREW_PREFIX/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh" ]]; then
+  . "$HOMEBREW_PREFIX/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
   zvm_after_init_commands+=('source <(fzf --zsh)')
 fi
 
@@ -40,42 +44,80 @@ if [[ -s $HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh ]]; then
   . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
 fi
 
+# --- History ----------------------------------------------------------------
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000000
 SAVEHIST=10000000
 
+# --- Completion -------------------------------------------------------------
+# Run compinit once. -C skips the security audit and the "new completions"
+# scan; regenerate the dump (rm ~/.zcompdump) after installing new tools.
 autoload -Uz compinit
-compinit
+compinit -C
 
-if command -v kubectl >/dev/null 2>&1; then
-  source <(kubectl completion zsh)
+# Yandex Cloud completion: the upstream file re-converts 3MB of bash completion
+# to zsh with sed on every startup. Pre-convert it once and cache the result.
+# The converted output needs the helper functions below and must be sourced
+# under `emulate -L sh` (a top-level `return` guard aborts it otherwise).
+_zsh_cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+_yc_src="$HOME/yandex-cloud/completion.zsh.inc"
+_yc_cache="$_zsh_cache/yc_completion.zsh"
+if [[ -f "$_yc_src" ]]; then
+  if [[ ! -f "$_yc_cache" || "$_yc_src" -nt "$_yc_cache" ]]; then
+    mkdir -p "$_zsh_cache"
+    {
+      cat <<'HELPERS'
+__yc_type() { if [ "$1" == "-t" ]; then shift; fi; type "$@"; }
+__yc_get_comp_words_by_ref() {
+  cur="${COMP_WORDS[COMP_CWORD]}"; prev="${COMP_WORDS[${COMP_CWORD}-1]}"
+  words=("${COMP_WORDS[@]}"); cword=("${COMP_CWORD[@]}")
+}
+autoload -U +X bashcompinit && bashcompinit
+HELPERS
+      zsh -c 'source "$1"; __yc_convert_bash_to_zsh' _ "$_yc_src"
+    } > "$_yc_cache"
+  fi
+  __yc_bash_source() { emulate -L sh; setopt kshglob noshglob braceexpand; source "$@"; }
+  __yc_bash_source "$_yc_cache"
 fi
 
+# kubectl completion is slow to generate; load it on first use.
+kubectl() {
+  unfunction kubectl 2>/dev/null
+  source <(command kubectl completion zsh)
+  command kubectl "$@"
+}
+
+# --- Environment ------------------------------------------------------------
 export XDG_CONFIG_HOME="$HOME/.config"
 export GOPATH="$HOME/go"
-export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$HOME/.antigravity/antigravity/bin"
 export CLAUDE_CODE_USE_BEDROCK=1
 
-# The next line updates PATH for YDB CLI.
-if [ -f '~/ydb/path.bash.inc' ]; then source '~/ydb/path.bash.inc'; 
-_ydb_comp="${XDG_DATA_HOME:-$HOME/.local/share}/ydb/completion.zsh.inc" && [ -f "$_ydb_comp" ] && source "$_ydb_comp"
+# --- PATH -------------------------------------------------------------------
+# Prepend only if not already present, so .zprofile/.zshrc don't duplicate.
+path_prepend() {
+  [[ -d "$1" ]] || return
+  case ":$PATH:" in
+    *":$1:"*) ;;
+    *) PATH="$1:$PATH" ;;
+  esac
+}
+path_prepend "$HOME/.local/bin"
+path_prepend "$GOPATH/bin"
+path_prepend "$HOME/.antigravity/antigravity/bin"
+path_prepend "$HOME/.kimi-code/bin"
+path_prepend "/opt/homebrew/opt/openjdk@21/bin"
+export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"
+path_prepend "$ANDROID_SDK_ROOT/platform-tools"
+
+# YDB CLI
+if [ -f "$HOME/ydb/path.bash.inc" ]; then
+  source "$HOME/ydb/path.bash.inc"
+  _ydb_comp="${XDG_DATA_HOME:-$HOME/.local/share}/ydb/completion.zsh.inc"
+  [ -f "$_ydb_comp" ] && source "$_ydb_comp"
 fi
 
-# The next line updates PATH for YDB CLI.
-if [ -f '$HOME/ydb/path.bash.inc' ]; then source '$HOME/ydb/path.bash.inc'; fi
-
-# Added by Antigravity CLI installer
-export PATH="$HOME/.local/bin:$PATH"
-# kimi-code
-export PATH="$HOME/.kimi-code/bin:$PATH"
-
-# openjdk@21 (for Firebase emulators / Java)
-export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
-
-export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"
-export PATH="$ANDROID_SDK_ROOT/platform-tools:$PATH"
-
-# Entire CLI shell completion
+# --- entire CLI completion --------------------------------------------------
 if command -v entire >/dev/null 2>&1; then
-  autoload -Uz compinit && compinit && source <(entire completion zsh)
+  source <(entire completion zsh)
 fi

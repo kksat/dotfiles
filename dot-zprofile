@@ -5,4 +5,10 @@ elif [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
 fi
 
 # Added by Antigravity CLI installer
-export PATH="~/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
+# Secrets must be available to non-interactive login shells too (e.g. pi-web
+# services run `zsh -lc`, which sources .zprofile but not .zshrc).
+if [ -f "$HOME/.secrets" ]; then
+  . "$HOME/.secrets"
+fi
