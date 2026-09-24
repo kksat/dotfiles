@@ -1,12 +1,23 @@
 {
+  "gracePeriodMs": 150,
   "terminals": [
     {
-      "key": "alt+t"
+      "key": "alt+t",
+      "width": "100%",
+      "height": "100%"
     },
     {
       "key": "alt+e",
       "command": "nvim",
-      "name": "editor"
+      "name": "editor",
+      "mode": "passthrough",
+      "gracePeriodMs": 150
+    },
+    {
+      "key": "alt+g",
+      "command": "lazygit",
+      "name": "git",
+      "mode": "passthrough"
     }
   ]
 }
