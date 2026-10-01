@@ -16,6 +16,10 @@ if command -v claude >/dev/null 2>&1; then
   alias cc=claude
 fi
 
+if command -v spf >/dev/null 2>&1; then
+  alias f=spf
+fi
+
 alias docker=podman
 alias k=kubectl
 alias cc=claude --allow-dangerously-skip-permissions
