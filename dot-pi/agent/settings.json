@@ -40,5 +40,11 @@
     "../../dev/pi-agent-extensions/packages/vim",
     "npm:pi-mcp-adapter"
   ],
-  "theme": "dark"
+  "theme": "dark",
+  "defaultTools": [
+    "+codemode"
+  ],
+  "codemode": {
+    "mode": "on"
+  }
 }
