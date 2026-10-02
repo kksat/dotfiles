@@ -20,6 +20,10 @@ if command -v spf >/dev/null 2>&1; then
   alias f=spf
 fi
 
+if command -v yazi >/dev/null 2>&1; then
+  alias y=yazi
+fi
+
 alias docker=podman
 alias k=kubectl
 alias cc=claude --allow-dangerously-skip-permissions
