@@ -30,7 +30,6 @@
     "npm:pi-side-agents",
     "../../dev/pi-agent-extensions/packages/worktree",
     "../../dev/pi-agent-extensions/packages/vim",
-    "npm:pi-mcp-adapter",
     "../../dev/pi-agent-extensions/packages/calm",
     "../../../../opt/homebrew/lib/node_modules/@jmfederico/pi-web/dist/pi-packages/relays",
     "npm:pi-cursor-sdk"
