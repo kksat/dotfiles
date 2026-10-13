@@ -1,5 +1,19 @@
 {
   "providers": {
+    "google-vertex": {
+      "api": "google-vertex",
+      "models": [
+        {
+          "id": "gemini-4-argon",
+          "name": "Gemini 4 Argon (Vertex AI)",
+          "reasoning": false,
+          "input": [
+            "text",
+            "image"
+          ]
+        }
+      ]
+    },
     "openai-work": {
       "baseUrl": "https://api.openai.com/v1",
       "api": "openai-responses",
