@@ -41,5 +41,8 @@
   ],
   "codemode": {
     "mode": "on"
-  }
+  },
+  "extensions": [
+    "+builtin:mcp"
+  ]
 }
