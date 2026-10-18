@@ -19,7 +19,7 @@ PLUGIN = Path(__file__).with_name("session-windows.tmux")
 class SessionWindowsTest(unittest.TestCase):
     def tmux(self, *args):
         return subprocess.check_output(
-            ["tmux", "-S", self.socket, *args], text=True
+            ["tmux", "-S", self.socket, *args], text=True, timeout=5
         ).strip()
 
     def setUp(self):
@@ -59,8 +59,15 @@ class SessionWindowsTest(unittest.TestCase):
         self.read_until(b"local-one")
 
     def stop_client(self):
+        self.tmux("display-popup", "-C")
+        self.read_until(b"")
         self.client.terminate()
-        self.client.wait(timeout=5)
+        try:
+            self.client.wait(timeout=1)
+        except subprocess.TimeoutExpired:
+            # An unread terminal redraw can prevent a graceful client shutdown.
+            self.client.kill()
+            self.client.wait(timeout=5)
 
     def read_until(self, marker):
         output = b""
@@ -74,9 +81,7 @@ class SessionWindowsTest(unittest.TestCase):
 
     def open_picker(self):
         os.write(self.master, b"\x02i")
-        output = self.read_until(b"sort: index")
-        self.assertNotIn(b"no matches", output)
-        return output
+        return self.read_until(b"Ctrl-n/Ctrl-p")
 
     def assert_local_windows(self, output):
         self.assertIn(b"local-one", output)
@@ -91,8 +96,10 @@ class SessionWindowsTest(unittest.TestCase):
         self.read_until(b"[grouped]")
         output = self.open_picker()
         self.assert_local_windows(output)
-        self.assertIn(b"grouped: 2 windows", output)
-        self.assertNotIn(b"main: 2 windows", output)
+        os.write(self.master, b"ltw")
+        self.read_until(b"1/2")
+        os.write(self.master, b"\r")
+        self.assert_selected("local-two", "grouped")
 
     def test_session_name_with_special_characters(self):
         self.tmux("rename-session", "-t", "main", "work's $HOME,#{session_id}")
@@ -110,13 +117,43 @@ class SessionWindowsTest(unittest.TestCase):
     def test_select_window(self):
         self.open_picker()
         os.write(self.master, b"\x1b[B\r")
+        self.assert_selected("local-two")
+
+    def test_live_fuzzy_search(self):
+        self.open_picker()
+        os.write(self.master, b"ltw")
+        self.read_until(b"1/2")
+        os.write(self.master, b"\r")
+        self.assert_selected("local-two")
+
+    def test_ctrl_n(self):
+        self.open_picker()
+        os.write(self.master, b"\x0e\r")
+        self.assert_selected("local-two")
+
+    def test_ctrl_p(self):
+        self.tmux("new-window", "-d", "-t", "main:", "-n", "local-three", "sleep 300")
+        self.read_until(b"local-three")
+        self.open_picker()
+        os.write(self.master, b"\x0e\x0e\x10\r")
+        self.assert_selected("local-two")
+
+    def test_cancel(self):
+        self.open_picker()
+        os.write(self.master, b"\x1b")
+        self.read_until(b"[main]")
+        self.assert_selected("local-one")
+
+    def assert_selected(self, window, session="main"):
         deadline = time.monotonic() + 5
         while time.monotonic() < deadline:
-            if self.tmux("display-message", "-p", "#{window_name}") == "local-two":
+            # Drain redraws so the pseudo-terminal cannot block fzf's exit.
+            self.read_until(b"")
+            if self.tmux("display-message", "-p", "#{window_name}") == window:
                 break
             time.sleep(0.05)
-        self.assertEqual(self.tmux("display-message", "-p", "#{window_name}"), "local-two")
-        self.assertEqual(self.tmux("display-message", "-p", "#{session_name}"), "main")
+        self.assertEqual(self.tmux("display-message", "-p", "#{window_name}"), window)
+        self.assertEqual(self.tmux("display-message", "-p", "#{session_name}"), session)
         self.assertEqual(self.tmux("display-message", "-p", "#{pane_mode}"), "")
 
 

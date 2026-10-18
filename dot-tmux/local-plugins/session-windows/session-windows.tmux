@@ -1,6 +1,8 @@
 #!/bin/sh
 
-# Freeze the invoking session ID at keypress; keep the per-row ID unexpanded.
-# -G includes every grouped session so the current session is always available.
+plugin_dir=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)
+
+# run-shell expands the invoking client/session at keypress, before the popup.
 tmux bind-key -T prefix i run-shell \
-    "tmux choose-tree -G -w -Z -t '#{pane_id}' -f '##{==:##{session_id},#{session_id}}'"
+    "tmux display-popup -E -c '#{client_name}' -w 80% -h 70% -T ' Session windows ' \
+        \"$plugin_dir/select-window.sh\" '#{session_id}'"
