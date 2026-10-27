@@ -1,5 +1,30 @@
 {
   "providers": {
+    "enmaas": {
+      "name": "EnMaaS",
+      "baseUrl": "https://api.enmaas.devshift.net/v1",
+      "api": "openai-completions",
+      "apiKey": "${ENMAAS_KEY}",
+      "authHeader": true,
+      "models": [
+        {
+          "id": "rits/zai-org/glm-5-3",
+          "name": "GLM-5.3 (EnMaaS)",
+          "reasoning": true,
+          "input": ["text"],
+          "contextWindow": 128000,
+          "maxTokens": 16384
+        },
+        {
+          "id": "rits/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "name": "DeepSeek V4.1 Flash (EnMaaS)",
+          "reasoning": true,
+          "input": ["text"],
+          "contextWindow": 128000,
+          "maxTokens": 16384
+        }
+      ]
+    },
     "google-vertex": {
       "api": "google-vertex",
       "models": [
