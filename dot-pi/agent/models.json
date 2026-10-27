@@ -22,6 +22,245 @@
           "input": ["text"],
           "contextWindow": 128000,
           "maxTokens": 16384
+        },
+        {
+          "id": "gpt-5.3-codex",
+          "name": "gpt-5.3-codex (EnMaaS)",
+          "api": "openai-responses",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384
+        },
+        {
+          "id": "gpt-5.4",
+          "name": "gpt-5.4 (EnMaaS)",
+          "api": "openai-responses",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384
+        },
+        {
+          "id": "gpt-5.6-luna",
+          "name": "gpt-5.6-luna (EnMaaS)",
+          "api": "openai-responses",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384
+        },
+        {
+          "id": "gemini-3.6-flash",
+          "name": "gemini-3.6-flash (EnMaaS)",
+          "reasoning": true,
+          "thinkingLevelMap": {
+            "off": null
+          },
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384
+        },
+        {
+          "id": "gemini-3.7-flash",
+          "name": "gemini-3.7-flash (EnMaaS)",
+          "reasoning": true,
+          "thinkingLevelMap": {
+            "off": null
+          },
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384
+        },
+        {
+          "id": "gemini-3.8-flash",
+          "name": "gemini-3.8-flash (EnMaaS)",
+          "reasoning": true,
+          "thinkingLevelMap": {
+            "off": null
+          },
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384
+        },
+        {
+          "id": "gemini-3.1-pro-preview",
+          "name": "gemini-3.1-pro-preview (EnMaaS)",
+          "reasoning": true,
+          "thinkingLevelMap": {
+            "off": null
+          },
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384
+        },
+        {
+          "id": "gpt-6-luna",
+          "name": "gpt-6-luna (EnMaaS)",
+          "api": "openai-responses",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384
+        },
+        {
+          "id": "gpt-6.1-sol",
+          "name": "gpt-6.1-sol (EnMaaS)",
+          "api": "openai-responses",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384
+        },
+        {
+          "id": "gpt-6.1-terra",
+          "name": "gpt-6.1-terra (EnMaaS)",
+          "api": "openai-responses",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384
+        },
+        {
+          "id": "gpt-6-sol",
+          "name": "gpt-6-sol (EnMaaS)",
+          "api": "openai-responses",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384
+        },
+        {
+          "id": "gpt-5.6-terra",
+          "name": "gpt-5.6-terra (EnMaaS)",
+          "api": "openai-responses",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384
+        },
+        {
+          "id": "gpt-6-astra",
+          "name": "gpt-6-astra (EnMaaS)",
+          "api": "openai-responses",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384
+        },
+        {
+          "id": "gpt-5.5",
+          "name": "gpt-5.5 (EnMaaS)",
+          "api": "openai-responses",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384
+        },
+        {
+          "id": "gpt-5.6-sol",
+          "name": "gpt-5.6-sol (EnMaaS)",
+          "api": "openai-responses",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384
+        },
+        {
+          "id": "codex-auto-review",
+          "name": "codex-auto-review (EnMaaS)",
+          "api": "openai-responses",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384
+        },
+        {
+          "id": "gpt-4o-mini",
+          "name": "gpt-4o-mini (EnMaaS)",
+          "api": "openai-responses",
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384
+        },
+        {
+          "id": "gpt-5-mini",
+          "name": "gpt-5-mini (EnMaaS)",
+          "api": "openai-responses",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384
+        },
+        {
+          "id": "gpt-5.4-nano",
+          "name": "gpt-5.4-nano (EnMaaS)",
+          "api": "openai-responses",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384
+        },
+        {
+          "id": "gpt-5.4-mini",
+          "name": "gpt-5.4-mini (EnMaaS)",
+          "api": "openai-responses",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384
+        },
+        {
+          "id": "gpt-5.2",
+          "name": "gpt-5.2 (EnMaaS)",
+          "api": "openai-responses",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384
         }
       ]
     },
