@@ -12,7 +12,7 @@
           "name": "GLM-5.3 (EnMaaS)",
           "reasoning": true,
           "input": ["text"],
-          "contextWindow": 128000,
+          "contextWindow": 1048576,
           "maxTokens": 16384
         },
         {
@@ -20,7 +20,7 @@
           "name": "DeepSeek V4.1 Flash (EnMaaS)",
           "reasoning": true,
           "input": ["text"],
-          "contextWindow": 128000,
+          "contextWindow": 1048576,
           "maxTokens": 16384
         },
         {
@@ -31,7 +31,7 @@
           "input": [
             "text"
           ],
-          "contextWindow": 128000,
+          "contextWindow": 400000,
           "maxTokens": 16384
         },
         {
@@ -42,7 +42,7 @@
           "input": [
             "text"
           ],
-          "contextWindow": 128000,
+          "contextWindow": 1050000,
           "maxTokens": 16384
         },
         {
@@ -53,7 +53,7 @@
           "input": [
             "text"
           ],
-          "contextWindow": 128000,
+          "contextWindow": 1050000,
           "maxTokens": 16384
         },
         {
@@ -66,7 +66,7 @@
           "input": [
             "text"
           ],
-          "contextWindow": 128000,
+          "contextWindow": 1048576,
           "maxTokens": 16384
         },
         {
@@ -79,7 +79,7 @@
           "input": [
             "text"
           ],
-          "contextWindow": 128000,
+          "contextWindow": 1048576,
           "maxTokens": 16384
         },
         {
@@ -92,7 +92,7 @@
           "input": [
             "text"
           ],
-          "contextWindow": 128000,
+          "contextWindow": 1048576,
           "maxTokens": 16384
         },
         {
@@ -105,7 +105,7 @@
           "input": [
             "text"
           ],
-          "contextWindow": 128000,
+          "contextWindow": 1048576,
           "maxTokens": 16384
         },
         {
@@ -116,7 +116,7 @@
           "input": [
             "text"
           ],
-          "contextWindow": 128000,
+          "contextWindow": 1050000,
           "maxTokens": 16384
         },
         {
@@ -127,7 +127,7 @@
           "input": [
             "text"
           ],
-          "contextWindow": 128000,
+          "contextWindow": 1050000,
           "maxTokens": 16384
         },
         {
@@ -138,7 +138,7 @@
           "input": [
             "text"
           ],
-          "contextWindow": 128000,
+          "contextWindow": 1050000,
           "maxTokens": 16384
         },
         {
@@ -149,7 +149,7 @@
           "input": [
             "text"
           ],
-          "contextWindow": 128000,
+          "contextWindow": 1050000,
           "maxTokens": 16384
         },
         {
@@ -160,7 +160,7 @@
           "input": [
             "text"
           ],
-          "contextWindow": 128000,
+          "contextWindow": 1050000,
           "maxTokens": 16384
         },
         {
@@ -171,7 +171,7 @@
           "input": [
             "text"
           ],
-          "contextWindow": 128000,
+          "contextWindow": 1050000,
           "maxTokens": 16384
         },
         {
@@ -182,7 +182,7 @@
           "input": [
             "text"
           ],
-          "contextWindow": 128000,
+          "contextWindow": 1050000,
           "maxTokens": 16384
         },
         {
@@ -193,7 +193,7 @@
           "input": [
             "text"
           ],
-          "contextWindow": 128000,
+          "contextWindow": 1050000,
           "maxTokens": 16384
         },
         {
@@ -226,7 +226,7 @@
           "input": [
             "text"
           ],
-          "contextWindow": 128000,
+          "contextWindow": 400000,
           "maxTokens": 16384
         },
         {
@@ -237,7 +237,7 @@
           "input": [
             "text"
           ],
-          "contextWindow": 128000,
+          "contextWindow": 400000,
           "maxTokens": 16384
         },
         {
@@ -248,7 +248,7 @@
           "input": [
             "text"
           ],
-          "contextWindow": 128000,
+          "contextWindow": 400000,
           "maxTokens": 16384
         },
         {
@@ -259,7 +259,7 @@
           "input": [
             "text"
           ],
-          "contextWindow": 128000,
+          "contextWindow": 400000,
           "maxTokens": 16384
         }
       ]
