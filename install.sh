@@ -5,6 +5,10 @@
 
 set -euo pipefail
 
+# Never prompt for git credentials: private repos (e.g. the opencode-config
+# submodule) must fail fast instead of hanging the install on a tty.
+export GIT_TERMINAL_PROMPT=0
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 

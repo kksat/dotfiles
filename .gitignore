@@ -15,3 +15,6 @@ dot-pi/agent/mcp-cache.json
 dot-pi/agent/npm
 dot-pi/agent/git
 dot-pi/**/node_modules
+# Runtime artifacts written through the ~/.config symlink (whole-dir stow)
+dot-config/github-copilot/
+dot-config/go/
