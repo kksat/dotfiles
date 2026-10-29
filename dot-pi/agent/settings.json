@@ -30,6 +30,7 @@
     "../../dev/pi-agent-extensions/packages/worktree",
     "../../dev/pi-agent-extensions/packages/vim",
     "../../dev/pi-agent-extensions/packages/calm",
+    "../../dev/pi-agent-extensions/packages/terminal",
     "npm:pi-mobile"
   ],
   "theme": "dark",

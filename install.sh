@@ -118,6 +118,12 @@ if [ ! -d "$HOME/dev/pi-agent-extensions" ]; then
   git clone https://github.com/kksat/pi-agent-extensions.git "$HOME/dev/pi-agent-extensions" || true
 fi
 
+# The terminal pi-package has native dependencies (node-pty); its
+# node_modules is gitignored, so install after cloning.
+if [ -d "$HOME/dev/pi-agent-extensions/packages/terminal" ]; then
+  (cd "$HOME/dev/pi-agent-extensions/packages/terminal" && npm install) || true
+fi
+
 # Update submodules if possible
 git submodule update --init --recursive || true
 
