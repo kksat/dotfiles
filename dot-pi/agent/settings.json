@@ -32,7 +32,7 @@
     "../../dev/pi-agent-extensions/packages/worktree",
     "../../dev/pi-agent-extensions/packages/vim",
     "../../dev/pi-agent-extensions/packages/calm",
-    "../../../../opt/homebrew/lib/node_modules/@jmfederico/pi-web/dist/pi-packages/relays",
+    "pi-web/dist/pi-packages/relays",
     "npm:pi-cursor-sdk"
   ],
   "theme": "dark",

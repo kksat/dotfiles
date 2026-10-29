@@ -148,6 +148,14 @@ if [ -f "$HOME/.terminfo/xterm-ghostty" ] && command -v tic &>/dev/null; then
 fi
 
 echo "=== [6/7] Installing Pi extensions and packages ==="
+# pi-web ships the relays pi-package (not published to npm separately).
+# Install it as a global npm package and expose it at ~/.pi/agent/pi-web so
+# settings.json can reference it with the OS-independent relative path
+# "pi-web/dist/pi-packages/relays" (npm root -g differs between macOS and
+# Linux Homebrew).
+npm install -g @jmfederico/pi-web
+ln -sfn "$(npm root -g)/@jmfederico/pi-web" "$HOME/.pi/agent/pi-web"
+
 if command -v pi &>/dev/null; then
   echo "Reconciling Pi packages..."
   pi update --extensions || true
