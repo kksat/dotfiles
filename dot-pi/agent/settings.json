@@ -14,7 +14,6 @@
     "openai-codex/gpt-6-luna",
     "openai-codex/gpt-6-astra",
     "amazon-bedrock/global.anthropic.claude-opus-5-5",
-    "cursor/grok-4.7@256k",
     "amazon-bedrock/global.anthropic.claude-sonnet-5-5",
     "openai-work/gpt-6-sol",
     "openai-work/gpt-6-luna",
@@ -32,8 +31,7 @@
     "../../dev/pi-agent-extensions/packages/worktree",
     "../../dev/pi-agent-extensions/packages/vim",
     "../../dev/pi-agent-extensions/packages/calm",
-    "pi-web/dist/pi-packages/relays",
-    "npm:pi-cursor-sdk"
+    "npm:pi-mobile"
   ],
   "theme": "dark",
   "defaultTools": [
