@@ -154,6 +154,14 @@ if [ -f "$HOME/.terminfo/xterm-ghostty" ] && command -v tic &>/dev/null; then
 fi
 
 echo "=== [6/7] Installing Pi extensions and packages ==="
+# pi-mobile's /remote exposes the hub over HTTPS via `tailscale serve`, which
+# needs the Tailscale operator set to the user (otherwise serve config is
+# root-only and /remote reports no HTTPS address). No-op when Tailscale is
+# absent or not running.
+if command -v tailscale &>/dev/null; then
+  run_sudo tailscale set --operator="$USER" || true
+fi
+
 if command -v pi &>/dev/null; then
   echo "Reconciling Pi packages..."
   pi update --extensions || true
