@@ -26,7 +26,6 @@
   "collapseChangelog": true,
   "hideThinkingBlock": true,
   "packages": [
-    "npm:pi-opencode-bridge",
     "npm:pi-side-agents",
     "../../dev/pi-agent-extensions/packages/worktree",
     "../../dev/pi-agent-extensions/packages/vim",
