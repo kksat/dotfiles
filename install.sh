@@ -153,8 +153,12 @@ if command -v pi &>/dev/null; then
   pi update --extensions || true
 fi
 
-echo "=== [7/7] Syncing Neovim plugins ==="
+echo "=== [7/7] Syncing Neovim plugins and tools ==="
 nvim --headless "+Lazy! sync" +qa || true
+# Preinstall treesitter parsers, LSP servers and Mason tools so the first
+# real nvim session never downloads anything. Blocks until done (see
+# lua/config/install-all.lua in the nvim config).
+nvim --headless "+LazyInstallAll" +qa || true
 
 echo "=== Verification ==="
 echo "pi location:      $(command -v pi || echo 'not found')"
