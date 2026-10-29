@@ -2,6 +2,8 @@
 
 # Build tools & system essentials
 build-essential
+# node-pty (terminal pi-package) hardcodes g++-11 as its Linux compiler
+g++-11
 procps
 curl
 git
