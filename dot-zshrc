@@ -27,6 +27,14 @@ if [ -f "$HOME/.alias" ]; then
 fi
 . "$HOME/.config/alias"
 
+# --- Ghostty terminfo --------------------------------------------------------
+# Ghostty forwards TERM=xterm-ghostty over SSH, but hosts without Ghostty
+# installed lack the entry ("'xterm-ghostty': unknown terminal type").
+# Compile the bundled source on demand; tic is idempotent.
+if ! infocmp xterm-ghostty &>/dev/null && [[ -f "$HOME/.terminfo/xterm-ghostty" ]]; then
+  TERMINFO="$HOME/.terminfo" tic -x "$HOME/.terminfo/xterm-ghostty" &>/dev/null
+fi
+
 # --- Editor -----------------------------------------------------------------
 if command -v nvim 1>/dev/null; then
   export EDITOR=nvim

@@ -18,3 +18,5 @@ dot-pi/**/node_modules
 # Runtime artifacts written through the ~/.config symlink (whole-dir stow)
 dot-config/github-copilot/
 dot-config/go/
+# Compiled terminfo entries (sources are tracked, binaries are not)
+dot-terminfo/[0-9A-Fa-f]/

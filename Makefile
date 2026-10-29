@@ -53,6 +53,10 @@ pi: ## Install pi coding agent
 nvim: dot-config/nvim ## Install and sync nvim plugins
 	nvim --headless "+Lazy! sync" +qa
 
+.PHONY: terminfo
+terminfo: ## Re-export Ghostty terminfo source (run on a Mac with Ghostty)
+	infocmp -x xterm-ghostty > dot-terminfo/xterm-ghostty
+
 .PHONY: install
 install: ## Install dotfiles, pi, and nvim with all dependencies
 	./install.sh

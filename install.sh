@@ -141,6 +141,12 @@ if command -v stow &>/dev/null; then
   stow --dotfiles --restow . --target="$HOME"
 fi
 
+# Compile the bundled Ghostty terminfo so TERM=xterm-ghostty works over SSH
+# on hosts where Ghostty itself is not installed.
+if [ -f "$HOME/.terminfo/xterm-ghostty" ] && command -v tic &>/dev/null; then
+  TERMINFO="$HOME/.terminfo" tic -x "$HOME/.terminfo/xterm-ghostty" || true
+fi
+
 echo "=== [6/7] Installing Pi extensions and packages ==="
 if command -v pi &>/dev/null; then
   echo "Reconciling Pi packages..."
