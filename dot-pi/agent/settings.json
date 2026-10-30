@@ -18,7 +18,13 @@
     "openai-work/gpt-6-sol",
     "openai-work/gpt-6-luna",
     "openai-work/gpt-6.1-sol",
-    "openai-codex/gpt-6.1-sol"
+    "openai-codex/gpt-6.1-sol",
+    "enmaas/rits/zai-org/glm-5-3",
+    "enmaas/rits/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+    "enmaas/gpt-6.1-sol",
+    "enmaas/gpt-6-astra",
+    "enmaas/gemini-3.8-flash",
+    "enmaas/gpt-6.1-terra"
   ],
   "defaultThinkingLevel": "high",
   "doubleEscapeAction": "tree",
