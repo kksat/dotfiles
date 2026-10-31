@@ -1,0 +1,7 @@
+# Sourced by every zsh invocation: interactive, login, and the non-interactive
+# `zsh -c` that tmux uses to run explicit window commands (e.g. pi spawned by
+# the worktree extension). Provider keys referenced as ${...} in
+# ~/.pi/agent/models.json must be exported here, not only in .zprofile/.zshrc.
+if [ -z "$ARA_API_CLIENT" ] && [ -f "$HOME/.secrets" ]; then
+	. "$HOME/.secrets"
+fi
