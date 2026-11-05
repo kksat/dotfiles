@@ -23,3 +23,6 @@ dot-config/go/
 # tic may emit hex- or letter-named subdirs depending on the ncurses build.
 dot-terminfo/*
 !dot-terminfo/xterm-ghostty
+/dot-config/gh
+/dot-config/systemd/user
+/dot-gnupg
