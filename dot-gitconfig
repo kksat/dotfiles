@@ -5,7 +5,6 @@
 	name = Kirill Satarin
 	email = 22549266+kksat@users.noreply.github.com
 [commit]
-	gpgsign = true
 [pull]
 	rebase = true
 [fetch]
