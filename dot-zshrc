@@ -63,17 +63,16 @@ SAVEHIST=10000000
 autoload -Uz compinit
 compinit -C
 
-# Yandex Cloud completion: the upstream file re-converts 3MB of bash completion
-# to zsh with sed on every startup. Pre-convert it once and cache the result.
-# The converted output needs the helper functions below and must be sourced
-# under `emulate -L sh` (a top-level `return` guard aborts it otherwise).
-_zsh_cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
-_yc_src="$HOME/yandex-cloud/completion.zsh.inc"
-_yc_cache="$_zsh_cache/yc_completion.zsh"
-if [[ -f "$_yc_src" ]]; then
+# Load Yandex Cloud's 3MB completion only on the first completion request.
+# Cache the bash-to-zsh conversion, but do not parse it in every new shell.
+_dotfiles_yc_completion() {
+  local _zsh_cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+  local _yc_src="$HOME/yandex-cloud/completion.zsh.inc"
+  local _yc_cache="$_zsh_cache/yc_completion.zsh" _yc_tmp
   if [[ ! -f "$_yc_cache" || "$_yc_src" -nt "$_yc_cache" ]]; then
-    mkdir -p "$_zsh_cache"
-    {
+    mkdir -p "$_zsh_cache" || return
+    _yc_tmp=$(mktemp "$_yc_cache.XXXXXX") || return
+    if ! {
       cat <<'HELPERS'
 __yc_type() { if [ "$1" == "-t" ]; then shift; fi; type "$@"; }
 __yc_get_comp_words_by_ref() {
@@ -82,11 +81,21 @@ __yc_get_comp_words_by_ref() {
 }
 autoload -U +X bashcompinit && bashcompinit
 HELPERS
-      zsh -c 'source "$1"; __yc_convert_bash_to_zsh' _ "$_yc_src"
-    } > "$_yc_cache"
+      zsh -dfc 'source "$1"; __yc_convert_bash_to_zsh' _ "$_yc_src"
+    } > "$_yc_tmp" || ! mv -f -- "$_yc_tmp" "$_yc_cache"; then
+      rm -f -- "$_yc_tmp"
+      return 1
+    fi
   fi
+  # The converted file needs sh emulation for its top-level return guard.
   __yc_bash_source() { emulate -L sh; setopt kshglob noshglob braceexpand; source "$@"; }
-  __yc_bash_source "$_yc_cache"
+  __yc_bash_source "$_yc_cache" || return
+  # bashcompinit registers a command plus flags, not just a function name.
+  [[ $_comps[yc] != _dotfiles_yc_completion ]] || return 1
+  ${=_comps[yc]} "$@"
+}
+if [[ -f "$HOME/yandex-cloud/completion.zsh.inc" ]]; then
+  compdef _dotfiles_yc_completion yc
 fi
 
 # kubectl completion is slow to generate; load it on first use.
@@ -118,14 +127,44 @@ path_prepend "/opt/homebrew/opt/openjdk@21/bin"
 export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"
 path_prepend "$ANDROID_SDK_ROOT/platform-tools"
 
-# YDB CLI
+# Keep YDB on PATH immediately; defer its completion until the first Tab.
+_dotfiles_ydb_completion() {
+  source "${XDG_DATA_HOME:-$HOME/.local/share}/ydb/completion.zsh.inc" || return
+  _ydb "$@"
+}
 if [ -f "$HOME/ydb/path.bash.inc" ]; then
   source "$HOME/ydb/path.bash.inc"
-  _ydb_comp="${XDG_DATA_HOME:-$HOME/.local/share}/ydb/completion.zsh.inc"
-  [ -f "$_ydb_comp" ] && source "$_ydb_comp"
+  if [[ -f "${XDG_DATA_HOME:-$HOME/.local/share}/ydb/completion.zsh.inc" ]]; then
+    compdef _dotfiles_ydb_completion ydb
+  fi
 fi
 
 # --- entire CLI completion --------------------------------------------------
+# Generate on the first Tab, then reuse across shells. Include binary identity
+# in the cache key: an upgrade can preserve an older modification timestamp.
+_dotfiles_entire_completion() {
+  local _cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/entire_completion.zsh"
+  local _binary=${commands[entire]:A} _key _saved _generated _tmp
+  local -A _stat
+  zmodload -F zsh/stat b:zstat || return
+  zstat -H _stat "$_binary" || return
+  _key="# $_binary:${_stat[device]}:${_stat[inode]}:${_stat[mtime]}:${_stat[ctime]}:${_stat[size]}"
+  if [[ -r "$_cache" ]]; then
+    IFS= read -r _saved < "$_cache"
+  fi
+  if [[ $_saved != "$_key" ]]; then
+    _generated=$(command entire completion zsh) || return
+    [[ -n $_generated ]] || return 1
+    mkdir -p "${_cache:h}" || return
+    _tmp=$(mktemp "$_cache.XXXXXX") || return
+    if ! print -r -- "$_key"$'\n'"$_generated" > "$_tmp" || ! mv -f -- "$_tmp" "$_cache"; then
+      rm -f -- "$_tmp"
+      return 1
+    fi
+  fi
+  source "$_cache" || return
+  _entire "$@"
+}
 if command -v entire >/dev/null 2>&1; then
-  source <(entire completion zsh)
+  compdef _dotfiles_entire_completion entire
 fi

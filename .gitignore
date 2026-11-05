@@ -1,4 +1,5 @@
 test
+tests/__pycache__/
 .DS_Store
 dot-tmux/plugins/tmux-sensible
 dot-tmux/plugins/tokyo-night-tmux

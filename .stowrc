@@ -5,6 +5,7 @@
 --ignore .gitmodules
 --ignore LICENSE
 --ignore test
+--ignore tests
 --ignore install.sh
 --ignore .DS_store
 --ignore .gitignore
