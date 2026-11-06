@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+socket="$HOME/.ssh/rex-pi.sock"
+control_socket="$HOME/.ssh/rex-pi-control.sock"
+
+control() {
+    ssh -T -o RemoteCommand=none -S "$control_socket" -O "$1" pi
+}
+
+if [ "$#" -gt 1 ]; then
+    echo "Usage: rex-pi-tunnel [start|stop|status]" >&2
+    exit 2
+fi
+
+case "${1:-start}" in
+    start)
+        if control check >/dev/null 2>&1; then
+            echo "Rex SSH tunnel to pi is already running."
+            exit 0
+        fi
+
+        umask 077
+        mkdir -p "$HOME/.ssh"
+        # Reuse pi's SSH identity/address, but bypass its interactive tmux command.
+        # Replace a stale forwarding socket when reconnecting after a dropped tunnel.
+        ssh -fNT \
+            -S "$control_socket" \
+            -o ControlMaster=auto \
+            -o ControlPersist=no \
+            -o RemoteCommand=none \
+            -o BatchMode=yes \
+            -o ConnectTimeout=10 \
+            -o ExitOnForwardFailure=yes \
+            -o ServerAliveInterval=30 \
+            -o ServerAliveCountMax=3 \
+            -o StreamLocalBindUnlink=yes \
+            -o StreamLocalBindMask=0177 \
+            -L "$socket:/run/user/1000/rex/server.sock" \
+            pi
+        echo "Rex SSH tunnel to pi is running at $socket."
+        ;;
+    stop)
+        control exit
+        ;;
+    status)
+        control check
+        ;;
+    *)
+        echo "Usage: rex-pi-tunnel [start|stop|status]" >&2
+        exit 2
+        ;;
+esac
