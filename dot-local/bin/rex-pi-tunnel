@@ -3,51 +3,95 @@ set -euo pipefail
 
 socket="$HOME/.ssh/rex-pi.sock"
 control_socket="$HOME/.ssh/rex-pi-control.sock"
+label="com.ksatarin.rex-pi-ssh"
+domain="gui/$(id -u)"
+service="$domain/$label"
+agent="$HOME/Library/LaunchAgents/$label.plist"
 
 control() {
     ssh -T -o RemoteCommand=none -S "$control_socket" -O "$1" pi
 }
 
 if [ "$#" -gt 1 ]; then
-    echo "Usage: rex-pi-tunnel [start|stop|status]" >&2
+    echo "Usage: rex-pi-tunnel [start|stop|status|run]" >&2
     exit 2
 fi
 
 case "${1:-start}" in
     start)
-        if control check >/dev/null 2>&1; then
-            echo "Rex SSH tunnel to pi is already running."
+        if [ ! -f "$agent" ]; then
+            echo "Missing $agent. Stow the dotfiles before starting the tunnel." >&2
+            exit 1
+        fi
+
+        launchctl enable "$service"
+        if launchctl print "$service" >/dev/null 2>&1; then
+            echo "Rex SSH tunnel is already managed by launchd."
             exit 0
         fi
 
+        # Retire a tunnel started by the old, unsupervised version of this command.
+        if control check >/dev/null 2>&1; then
+            control exit
+            for _ in {1..20}; do
+                if ! control check >/dev/null 2>&1; then
+                    break
+                fi
+                sleep 0.1
+            done
+            if control check >/dev/null 2>&1; then
+                echo "The old SSH tunnel has not stopped; refusing to start another." >&2
+                exit 1
+            fi
+        fi
+
+        launchctl bootstrap "$domain" "$agent"
+        echo "Rex SSH tunnel enabled; launchd reconnects when the network is available."
+        ;;
+    stop)
+        # Disabling also prevents the plist from starting the tunnel at next login.
+        launchctl disable "$service"
+        if launchctl print "$service" >/dev/null 2>&1; then
+            launchctl bootout "$service"
+        elif control check >/dev/null 2>&1; then
+            control exit
+        fi
+        echo "Rex SSH tunnel stopped and automatic startup disabled."
+        ;;
+    status)
+        if ! launchctl print "$service" >/dev/null 2>&1; then
+            echo "Rex SSH tunnel is not enabled." >&2
+            exit 1
+        fi
+        echo "Rex SSH tunnel is managed by launchd."
+        if ! control check; then
+            echo "SSH connection is unavailable; launchd will retry." >&2
+            exit 1
+        fi
+        ;;
+    run)
+        # launchd must supervise the foreground SSH process, not a detached child.
         umask 077
-        mkdir -p "$HOME/.ssh"
-        # Reuse pi's SSH identity/address, but bypass its interactive tmux command.
-        # Replace a stale forwarding socket when reconnecting after a dropped tunnel.
-        ssh -fNT \
+        mkdir -p "$HOME/.ssh" "$HOME/Library/Logs"
+        exec >>"$HOME/Library/Logs/rex-pi-ssh.log" 2>&1
+        exec ssh -NT \
             -S "$control_socket" \
             -o ControlMaster=auto \
             -o ControlPersist=no \
+            -o ForkAfterAuthentication=no \
             -o RemoteCommand=none \
             -o BatchMode=yes \
             -o ConnectTimeout=10 \
             -o ExitOnForwardFailure=yes \
-            -o ServerAliveInterval=30 \
+            -o ServerAliveInterval=15 \
             -o ServerAliveCountMax=3 \
             -o StreamLocalBindUnlink=yes \
             -o StreamLocalBindMask=0177 \
             -L "$socket:/run/user/1000/rex/server.sock" \
             pi
-        echo "Rex SSH tunnel to pi is running at $socket."
-        ;;
-    stop)
-        control exit
-        ;;
-    status)
-        control check
         ;;
     *)
-        echo "Usage: rex-pi-tunnel [start|stop|status]" >&2
+        echo "Usage: rex-pi-tunnel [start|stop|status|run]" >&2
         exit 2
         ;;
 esac
