@@ -35,7 +35,7 @@
     "../../dev/pi-agent-extensions/packages/calm",
     "../../dev/pi-agent-extensions/packages/terminal",
     "../../dev/pi-agent-extensions/packages/worktree-rex",
-    "npm:pi-mobile"
+    "git:github.com/kksat/pi-mobile@fix/homescreen-pairing"
   ],
   "theme": "dark",
   "defaultTools": [
