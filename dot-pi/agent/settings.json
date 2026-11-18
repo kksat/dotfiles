@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "1.4.0",
+  "lastChangelogVersion": "1.5.2",
   "defaultProvider": "openai-work",
   "defaultModel": "gpt-6.1-sol",
   "enabledModels": [
@@ -22,7 +22,8 @@
     "enmaas/gpt-6.1-sol",
     "enmaas/gpt-6-astra",
     "enmaas/gemini-3.8-flash",
-    "enmaas/gpt-6.1-terra"
+    "enmaas/gpt-6.1-terra",
+    "enmaas/rits/meta-models/Muse-Spark-Open-816B-A42B-NVFP4"
   ],
   "defaultThinkingLevel": "high",
   "doubleEscapeAction": "tree",
