@@ -24,6 +24,14 @@
           "maxTokens": 16384
         },
         {
+          "id": "rits/meta-models/Muse-Spark-Open-816B-A42B-NVFP4",
+          "name": "Muse Spark Open (EnMaaS)",
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 1048576,
+          "maxTokens": 16384
+        },
+        {
           "id": "gpt-5.3-codex",
           "name": "gpt-5.3-codex (EnMaaS)",
           "api": "openai-responses",
