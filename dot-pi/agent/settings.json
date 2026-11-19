@@ -20,7 +20,8 @@
     "enmaas/gemini-3.8-flash",
     "enmaas/gpt-6.1-terra",
     "enmaas/rits/meta-models/Muse-Spark-Open-816B-A42B-NVFP4",
-    "google-vertex/gemini-4-neon"
+    "google-vertex/gemini-4-neon",
+    "google-vertex/gemini-4-carbon"
   ],
   "defaultThinkingLevel": "high",
   "doubleEscapeAction": "tree",
