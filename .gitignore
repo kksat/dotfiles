@@ -27,3 +27,4 @@ dot-terminfo/*
 /dot-config/systemd/user
 /dot-gnupg
 dot-codex/config.toml
+/dot-config/gcloud
