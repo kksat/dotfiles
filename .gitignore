@@ -26,3 +26,4 @@ dot-terminfo/*
 /dot-config/gh
 /dot-config/systemd/user
 /dot-gnupg
+dot-codex/config.toml
